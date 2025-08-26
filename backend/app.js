@@ -1,4 +1,4 @@
-// npm install express express-session pg passport passport-local ejs dotenv express-validator
+// npm install express express-session pg passport passport-local ejs dotenv express-validator @quixo3/prisma-session-store
 //REQUIRE brings  bring in external JavaScript files (modules) and make their exported functionalities available within the current file or scope. 
 const path = require("node:path");
 const express = require("express");
