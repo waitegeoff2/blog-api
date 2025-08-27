@@ -14,6 +14,43 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+model User {
+  id    Int      @id @default(autoincrement())
+  name  String   @db.VarChar(255)
+  username  String   @unique
+  password  String   @db.VarChar(255)
+  isAuth   Boolean   @default(false)
+
+  posts     Post []
+  comments  Comment []
+}
+
+model Post {
+  id   Int   @id @default(autoincrement())
+
+  author    User   @relation(fields: [authorId], references: [id])
+  authorId    Int
+
+  title  String   @db.VarChar(255)
+  body   String
+  published   Boolean  @default(false)
+  postTime  DateTime  @default(now()) 
+  comments   Comment[]
+  
+}
+
+model Comment {
+  id   Int   @id @default(autoincrement())
+  
+  author    User   @relation(fields: [authorId], references: [id])
+  authorId    Int
+  post   Post    @relation(fields: [postId], references: [id])
+  postId   Int
+
+  createdAt  DateTime  @default(now())
+  content   String  
+}
+
 //for session cookies
 
 model Session {
