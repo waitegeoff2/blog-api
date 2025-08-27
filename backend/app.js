@@ -66,8 +66,8 @@ app.use("/", loginRouter);
 app.use("/posts/comments", commentsRouter);
 
 // Error middleware: Every thrown error in the application or the previous middleware function calling `next` with an error as an argument will eventually go to this middleware function
-app.use((err, req, res, next) => {
-  console.error(`Oops there seems to be a problem: ${err}`);
+app.use((error, req, res, next) => {
+  console.error(`Oops there seems to be a problem: ${error}`);
 });
 
 const PORT = 3000;

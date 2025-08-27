@@ -1,11 +1,12 @@
 const db = require('../db/queries')
 
-async function getPosts(req, res) {
+async function getPosts(req, res, next) {
     try {
         const posts = await db.getPosts()
-        return posts;
-    } catch (err) {
-        next(err);
+        res.json(posts)
+        
+    } catch (error) {
+        next(error);
     }
 }
 
