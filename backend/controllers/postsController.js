@@ -10,11 +10,18 @@ async function getPosts(req, res) {
 
 async function createPost(req, res) {
     try {
-
+        let title = req.body.title;
+        let author = req.body.author;
+        let content = req.body.content;
+        await db.createPost(author, title, content)
     } catch (err) {
         next(err);
     }
 }
+
+//edit post
+
+//delete post
 
 module.exports = {
     getPosts,
