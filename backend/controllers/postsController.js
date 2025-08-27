@@ -3,6 +3,7 @@ const db = require('../db/queries')
 async function getPosts(req, res) {
     try {
         const posts = await db.getPosts()
+        return posts;
     } catch (err) {
         next(err);
     }
