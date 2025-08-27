@@ -1,6 +1,14 @@
 const db = require('../db/queries')
 
-async function getPosts(req, req) {
+async function getPosts(req, res) {
+    try {
+        const posts = await db.getPosts()
+    } catch (err) {
+        next(err);
+    }
+}
+
+async function createPost(req, res) {
     try {
 
     } catch (err) {
@@ -10,4 +18,5 @@ async function getPosts(req, req) {
 
 module.exports = {
     getPosts,
+    createPost
 }
