@@ -5,7 +5,6 @@ const express = require("express");
 const app = express();
 const session = require("express-session");
 const passport = require("passport");
-const indexRouter = require("./routes/indexRouter")
 require('dotenv').config();
 require('./config/passport');
 const db = require('./db/queries')
@@ -52,19 +51,32 @@ app.use((req, res, next) => {
   next();
 });
 
+//import routes
+const indexRouter = require("./routes/indexRouter")
+const postsRouter = require('./routes/postsRouter')
+const userRouter = require('./routes/userRouter')
+const loginRouter = require('./routes/loginRouter')
+const commentsRouter = require('./routes/commentsRouter')
+
 //router
 app.use("/", indexRouter);
+app.use("/posts", postsRouter);
+app.use("/", userRouter);
+app.use("/", loginRouter);
+app.use("/posts/comments", commentsRouter);
 
 // Error middleware: Every thrown error in the application or the previous middleware function calling `next` with an error as an argument will eventually go to this middleware function
 app.use((err, req, res, next) => {
-  console.error(err.stack); // Log the error for debugging
-  res.status(err.statusCode || 500).json({
-    message: err.message || 'Something went wrong!',
-    status: err.statusCode || 500
-  });
+  console.error(`Oops there seems to be a problem: ${err}`);
 });
 
 const PORT = 3000;
-app.listen(PORT, () => {
-  console.log(`App listening on port ${PORT}!`);
+app.listen(PORT, (error) => {
+  // This is important!
+  // Without this, any startup errors will silently fail
+  // instead of giving you a helpful error message.
+  if (error) {
+    throw error;
+  }
+  console.log(`Rest API Express app - listening on port ${PORT}!`);
 });

@@ -37,6 +37,9 @@ passport.use(
     }
   })
 );
+
+//INSTEADE OF THESE - JWT PASSPORT STRATEGY??????
+
 //function TWO and THREE:
 //allowing users to log in and stay logged in as they move around
 //creates a cookie called connect.sid that is stored in the user's browser 
