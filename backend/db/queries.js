@@ -50,7 +50,7 @@ async function getPosts() {
 async function getSinglePost(postId) {
     try {
         const post = parseInt(postId)
-        const singlePost = await prisma.post.findMany({
+        const singlePost = await prisma.post.findFirst({
             where: {
                 id: post,
             },
@@ -76,6 +76,23 @@ async function getSinglePost(postId) {
         return singlePost;
     } catch(error) {
         console.error("Couldn't find this post: ", error);
+    }
+}
+
+async function getUserPosts(userId){
+    try{ 
+    const posts = await prisma.post.findMany({
+        where: {
+            authorId: userId,
+        },
+        include: {
+            author: true,
+        }
+    })
+
+    return posts;
+    } catch (error) {
+        console.error("Couldn't find posts: ", error)
     }
 }
 
@@ -169,6 +186,7 @@ module.exports = {
     becomeAuth,
     getPosts,
     getSinglePost,
+    getUserPosts,
     createPost,
     deletePost,
     postComment,

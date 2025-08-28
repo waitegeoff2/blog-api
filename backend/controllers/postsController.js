@@ -23,6 +23,17 @@ async function getSinglePost(req, res) {
     }
 }
 
+//find an author's posts
+//id will be pulled from JWT TOKEN
+async function getUserPosts(req, res){ 
+    // try {
+    // //const userId = GET FROM JWT TOKEN
+    // //const posts = await db.getUserPosts(userId)
+    // } catch(error) {
+    //     next(error)
+    // }
+}
+
 async function createPost(req, res) {
     try {
         let title = req.body.title;
@@ -76,6 +87,7 @@ module.exports = {
     getPosts,
     createPost,
     getSinglePost,
+    getUserPosts,
     deletePost,
     postComment,
     deleteComment,
