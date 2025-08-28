@@ -37,6 +37,7 @@ async (req, res, next) => {
         let name = req.body.name;
         let username = req.body.username;
         let password = req.body.password;
+        let auth = req.body.isAuth;
         //const hashedPassword = await bcrypt.hash(req.body.password, 10);
         const newUser = await db.createUser(name, username, password)
         res.json(newUser, errors) //is this necessary?
@@ -45,6 +46,11 @@ async (req, res, next) => {
     }
 }
 ]
+
+//make user an author
+async function becomeAuth(userId) {
+    await db.becomeAuth(userId);
+}
 
 //delete user
 async function deleteUser(req, res, next) {

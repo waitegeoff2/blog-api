@@ -1,5 +1,6 @@
 const db = require('../db/queries')
 
+//blog page displays all posts with authors
 async function getPosts(req, res, next) {
     try {
         const posts = await db.getPosts()
@@ -9,6 +10,7 @@ async function getPosts(req, res, next) {
     }
 }
 
+//clicking on post, you get the post info, author info, and comments
 async function getSinglePost(req, res) {
     const postId = req.params.postId;
     const post = await db.getSinglePost(postId)
