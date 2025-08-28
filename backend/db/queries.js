@@ -5,8 +5,8 @@ async function getPosts() {
     try {
         const posts = await prisma.post.findMany()
         return posts;
-    } catch(err) {
-        console.error("Couldn't find blog posts: ", err);
+    } catch(error) {
+        console.error("Couldn't find blog posts: ", error);
     }
 }
 
@@ -19,8 +19,8 @@ async function createPost(author, title, body) {
                 body: body,
             }
         })
-    } catch(err) {
-        console.error("Failed to create post: ", err);
+    } catch(error) {
+        console.error("Failed to create post: ", error);
     }
 }
 

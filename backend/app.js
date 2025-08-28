@@ -67,8 +67,12 @@ app.use("/posts/comments", commentsRouter);
 
 // Error middleware: Every thrown error in the application or the previous middleware function calling `next` with an error as an argument will eventually go to this middleware function
 app.use((error, req, res, next) => {
-  console.error(`Oops there seems to be a problem: ${error}`);
+  console.error(`Uhoh something went wrong: ${error}`);
+  //with throw new Error("OH NO!");
+  // You will  see an OH NO! in the page, with a status code of 500 that can be seen in the network tab of the dev tools
+  res.status(500).send(err);
 });
+
 
 const PORT = 3000;
 app.listen(PORT, (error) => {

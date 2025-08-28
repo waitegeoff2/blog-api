@@ -46,7 +46,15 @@ async (req, res, next) => {
 ]
 
 //delete user
+async function deleteUser(req, res, next) {
+    try {
+
+    } catch(err) {
+        next(err);
+    }
+}
 
 module.exports = {
     createUser,
+    deleteUser
 }
