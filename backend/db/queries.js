@@ -10,6 +10,33 @@ async function getPosts() {
     }
 }
 
+async function getSinglePost(postId) {
+    const post = parseInt(postId)
+    const singlePost = await prisma.post.findMany({
+        where: {
+            id: post,
+        },
+        include: {
+            user: true,
+        },
+        select: {
+                id: true,
+                title: true,
+                body: true,
+                published: true,
+                postTime: true,
+                comments: {
+                        id: true,
+                        author: true,
+                        createdAt: true,                        
+                        authorId: true,
+                        content: true
+                    }
+                }
+            })
+    return singlePost;
+}
+
 async function createPost(author, title, body) {
     try {
         await prisma.post.create({
@@ -26,5 +53,6 @@ async function createPost(author, title, body) {
 
 module.exports = {
     getPosts,
+    getSinglePost,
     createPost
 }

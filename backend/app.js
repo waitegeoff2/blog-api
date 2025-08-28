@@ -70,7 +70,7 @@ app.use((error, req, res, next) => {
   console.error(`Uhoh something went wrong: ${error}`);
   //with throw new Error("OH NO!");
   // You will  see an OH NO! in the page, with a status code of 500 that can be seen in the network tab of the dev tools
-  res.status(500).send(err);
+  res.status(500).send(error);
 });
 
 

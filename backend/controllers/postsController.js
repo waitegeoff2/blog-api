@@ -4,10 +4,16 @@ async function getPosts(req, res, next) {
     try {
         const posts = await db.getPosts()
         res.json(posts)
-        
     } catch (error) {
         next(error);
     }
+}
+
+async function getSinglePost(req, res) {
+    const postId = req.params.postId;
+    const post = await db.getSinglePost(postId)
+    // const returnedFiles = files[0];
+    res.json(post)
 }
 
 async function createPost(req, res) {
@@ -27,5 +33,6 @@ async function createPost(req, res) {
 
 module.exports = {
     getPosts,
-    createPost
+    createPost,
+    getSinglePost
 }

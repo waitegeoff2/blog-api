@@ -38,9 +38,10 @@ async (req, res, next) => {
         let username = req.body.username;
         let password = req.body.password;
         //const hashedPassword = await bcrypt.hash(req.body.password, 10);
-        await db.createUser(name, username, password)
-    } catch(err) {
-        next(err);
+        const newUser = await db.createUser(name, username, password)
+        res.json(newUser, errors) //is this necessary?
+    } catch(error) {
+        next(error);
     }
 }
 ]
