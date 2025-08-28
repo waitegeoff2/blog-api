@@ -1,5 +1,6 @@
 const db = require('../db/queries')
 
+// POSTS
 //blog page displays all posts with authors
 async function getPosts(req, res, next) {
     try {
@@ -34,6 +35,7 @@ async function createPost(req, res) {
 }
 
 //edit post
+//ADD
 
 //delete post
 async function deletePost(req, res){
@@ -58,6 +60,7 @@ async function postComment(req, res){
     }    
 } 
 
+//delete comment
 async function deleteComment(req, res){
     try {
         const commentId = req.params.commentId;

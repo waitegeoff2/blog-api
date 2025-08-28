@@ -56,7 +56,6 @@ const indexRouter = require("./routes/indexRouter")
 const postsRouter = require('./routes/postsRouter')
 const userRouter = require('./routes/userRouter')
 const loginRouter = require('./routes/loginRouter')
-const commentsRouter = require('./routes/commentsRouter')
 
 //router
 app.use("/", indexRouter);
