@@ -4,6 +4,15 @@ const postsController = require('../controllers/postsController')
 
 postsRouter.get('/', postsController.getPosts)
 postsRouter.post('/', postsController.createPost)
-postsRouter.get('./:postId', postsController.getSinglePost)
+//get a post and show the comments and the author
+postsRouter.get('/:postId', postsController.getSinglePost)
+
+//delete comment
+
+//COMMENTS
+//create comment
+postsRouter.post('/:postId', postsController.postComment)
+
+//delete comment
 
 module.exports = postsRouter;

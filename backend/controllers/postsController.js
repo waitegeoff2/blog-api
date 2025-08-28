@@ -33,8 +33,16 @@ async function createPost(req, res) {
 
 //delete post
 
+//post comment
+async function postComment(req, res){
+    const postId = req.params.postId
+    const content = req.body.content
+
+    await db.postComment(postId, content)    
+}
 module.exports = {
     getPosts,
     createPost,
-    getSinglePost
+    getSinglePost,
+    postComment
 }
