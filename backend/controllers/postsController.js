@@ -6,16 +6,20 @@ async function getPosts(req, res, next) {
         const posts = await db.getPosts()
         res.json(posts)
     } catch (error) {
-        next(error);
+        next(error)
     }
 }
 
 //clicking on post, you get the post info, author info, and comments
 async function getSinglePost(req, res) {
-    const postId = req.params.postId;
-    const post = await db.getSinglePost(postId)
-    // const returnedFiles = files[0];
-    res.json(post)
+    try {
+        const postId = req.params.postId;
+        const post = await db.getSinglePost(postId)
+        // const returnedFiles = files[0];
+        res.json(post)
+    } catch (error) {
+        next(error)
+    }
 }
 
 async function createPost(req, res) {
@@ -24,25 +28,52 @@ async function createPost(req, res) {
         let author = req.body.author;
         let content = req.body.content;
         await db.createPost(author, title, content)
-    } catch (err) {
-        next(err);
+    } catch (error) {
+        next(error);
     }
 }
 
 //edit post
 
 //delete post
+async function deletePost(req, res){
+    try {
+        const postId = req.params.postId
+        await db.deletePost(postId)
+    } catch (error) {
+        next(error);
+    }
+}
 
+//COMMENTS
 //post comment
 async function postComment(req, res){
-    const postId = req.params.postId
-    const content = req.body.content
+    try{
+        const postId = req.params.postId
+        const content = req.body.content
 
-    await db.postComment(postId, content)    
+        await db.postComment(postId, content)
+    } catch (error) {
+        next(error)
+    }    
+} 
+
+async function deleteComment(req, res){
+    try {
+        const commentId = req.params.commentId;
+        await db.deleteComment(commentId)
+    } catch (error) {
+        next(error)
+    }  
 }
+
+
+
 module.exports = {
     getPosts,
     createPost,
     getSinglePost,
-    postComment
+    deletePost,
+    postComment,
+    deleteComment,
 }

@@ -3,24 +3,32 @@ const prisma = require('./prisma');
 //USER QUERIES
 
 async function createUser(name, username, password) {
-    await prisma.user.create({
-        data: {
-            name: name,
-            username: username,
-            password: password
-        }
-    })
+    try {
+        await prisma.user.create({
+            data: {
+                name: name,
+                username: username,
+                password: password
+            }
+        })
+    } catch(error) {
+        console.error("Something went wrong: ", error);
+    }
 }
 
 async function becomeAuth(userId){
-    await prisma.user.update({
-        where: {
-            id: userId,
-        },
-        data: {
-            isAuth: true,
-        }
-    })
+    try {
+        await prisma.user.update({
+            where: {
+                id: userId,
+            },
+            data: {
+                isAuth: true,
+            }
+        })
+    } catch(error) {
+        console.error("Something went wrong: ", error);
+    }
 }
 
 //POST QUERIES
@@ -85,6 +93,19 @@ async function createPost(author, title, body) {
     }
 }
 
+//delete post
+async function deletePost(postId){
+    try{ 
+        await prisma.post.delete({
+            where: {
+                id: postId,
+            }
+        })
+    } catch(error) {
+        console.error("Something went wrong: ", error);
+    }
+}
+
 //post a comment
 async function postComment(postId, content){
     try {
@@ -109,6 +130,18 @@ async function postComment(postId, content){
     catch(error) {
         console.error("Something went wrong: ", error);
     }
+}
+
+async function deleteComment(commentId){
+    try {
+        await prisma.comment.delete({
+            where: {
+                id: commentId,
+            }
+        })
+    } catch(error) {
+        console.error("Something went wrong: ", error);
+    } 
 }
 
 //GET COMMENTS ON INDIVIDUAL POST
@@ -137,5 +170,7 @@ module.exports = {
     getPosts,
     getSinglePost,
     createPost,
-    postComment
+    deletePost,
+    postComment,
+    deleteComment
 }

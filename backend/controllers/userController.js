@@ -63,5 +63,6 @@ async function deleteUser(req, res, next) {
 
 module.exports = {
     createUser,
+    becomeAuth,
     deleteUser
 }
