@@ -140,7 +140,7 @@ async function postComment(postId, content){
         data: {
             postId: postId,
             content: content,
-            authorId: authorId,
+            authorId: authorId.authorId,
         }
     })
     }
@@ -148,6 +148,8 @@ async function postComment(postId, content){
         console.error("Something went wrong: ", error);
     }
 }
+
+postComment(3, 'test comment on other post')
 
 async function deleteComment(commentId){
     try {

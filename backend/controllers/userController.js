@@ -32,14 +32,15 @@ validateUser,
 async (req, res, next) => {
     //pass this on?
     const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array(), input: req.body });
+    }
     try {
         const user = req.body;
         let name = req.body.name;
         let username = req.body.username;
-        let password = req.body.password;
-        let auth = req.body.isAuth;
-        //const hashedPassword = await bcrypt.hash(req.body.password, 10);
-        const newUser = await db.createUser(name, username, password)
+        let hashedPassword = await bcrypt.hash(req.body.password, 10);
+        const newUser = await db.createUser(name, username, hashedPassword)
         res.json(newUser, errors) //is this necessary?
     } catch(error) {
         next(error);

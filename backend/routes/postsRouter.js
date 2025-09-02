@@ -16,7 +16,7 @@ postsRouter.delete('/:postId', postsController.deletePost)
 
 //find author's (pull up all of an author's posts)
 //usign id that will be pulled from JWT TOKEN
-postsRouter.get('/yourPosts', postsController.getUserPosts)
+postsRouter.get('/yourPosts', passport.authenticate('jwt', { session: false }), postsController.getUserPosts)
 
 //COMMENTS
 //create comment
@@ -24,6 +24,5 @@ postsRouter.post('/:postId', postsController.postComment)
 
 //delete comment
 postsRouter.delete('/:postId/:commentId', postsController.deleteComment)
-
 
 module.exports = postsRouter;
