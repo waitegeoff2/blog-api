@@ -61,7 +61,7 @@ const loginRouter = require('./routes/loginRouter')
 app.use("/", indexRouter);
 app.use("/posts", postsRouter);
 app.use("/", userRouter);
-app.use("/", loginRouter);
+app.use("/log-in", loginRouter);
 
 // Error middleware: Every thrown error in the application or the previous middleware function calling `next` with an error as an argument will eventually go to this middleware function
 app.use((error, req, res, next) => {

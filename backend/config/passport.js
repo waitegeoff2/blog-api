@@ -1,12 +1,16 @@
 //putting all the passport stuff here and then making it available in the app
 const passport = require("passport");
-//import your prisma client into here
+//passport login imports
 const prisma = require("../db/prisma");
 const LocalStrategy = require('passport-local').Strategy;
 const bcrypt = require("bcryptjs");
+//JWT imports
+const JwtStrategy = require('passport-jwt').Strategy;
+const ExtractJwt = require('passport-jwt').ExtractJwt;
+const jwtSecret = process.env.JWT_SECRET; // Use a strong, environment variable for production
+require('dotenv').config();
 
-//PASSPORT PASSWORD/COOKIE FUNCTIONS (UPDATE)
-//passport middleware - match un and pw
+//passport middleware for username and password
 passport.use(
   new LocalStrategy(async (username, password, done) => {
     try {
@@ -38,24 +42,48 @@ passport.use(
   })
 );
 
-//INSTEADE OF THESE - JWT PASSPORT STRATEGY??????
+//JWT strategy for token verification
+const jwtOptions = {
+  jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
+  secretOrKey: jwtSecret,
+};
 
-//function TWO and THREE:
-//allowing users to log in and stay logged in as they move around
-//creates a cookie called connect.sid that is stored in the user's browser 
-passport.serializeUser((user, done) => {
-  done(null, user.id);
-});
-
-passport.deserializeUser(async (id, done) => {
+passport.use(new JwtStrategy(jwtOptions, async (jwt_payload, done) => {
   try {
     const user = await prisma.user.findFirst({
-    where: {
-        id: id,
-    },
-    });
-    done(null, user);
-  } catch(err) {
-    done(err);
+        where: {
+            id: jwt_payload.id,
+        },
+        }); // Assuming payload contains user ID
+    if (user) {
+      return done(null, user);
+    } else {
+      return done(null, false);
+    }
+  } catch (err) {
+    return done(err);
   }
-});
+}));
+
+
+// //INSTEADE OF THESE - JWT PASSPORT STRATEGY??????
+
+// //function TWO and THREE:
+// //allowing users to log in and stay logged in as they move around
+// //creates a cookie called connect.sid that is stored in the user's browser 
+// passport.serializeUser((user, done) => {
+//   done(null, user.id);
+// });
+
+// passport.deserializeUser(async (id, done) => {
+//   try {
+//     const user = await prisma.user.findFirst({
+//     where: {
+//         id: id,
+//     },
+//     });
+//     done(null, user);
+//   } catch(err) {
+//     done(err);
+//   }
+// });
