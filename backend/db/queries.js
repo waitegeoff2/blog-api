@@ -149,8 +149,6 @@ async function postComment(postId, content){
     }
 }
 
-postComment(3, 'test comment on other post')
-
 async function deleteComment(commentId){
     try {
         await prisma.comment.delete({
