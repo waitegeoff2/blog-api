@@ -12,34 +12,36 @@ export default function RegistrationForm() {
     let newErrors = [];
     let isValid = true;
 
+    //validations
     if (!name) {
-      newErrors.push = 'Your name is required.';
+      newErrors.push('Your name is required.');
       isValid = false;
     }
 
     if (!username) {
-      newErrors.push = 'Username is required.';
+      newErrors.push('Username is required.');
       isValid = false;
     }
 
     if (!password) {
-      newErrors.push = 'Password is required.';
+      newErrors.push('Password is required.');
       isValid = false;
     }
 
     if(password !== confirmPassword) {
-      newErrors.push = 'Passwords must match.';
+      newErrors.push('Passwords must match.');
       isValid = false;
     }
-    // Add more validation rules for email, password, etc.
 
     setErrArray(newErrors);
+    console.log(errArray)
     return isValid;
   };
 
     async function handleSubmit(e) {
         e.preventDefault()
 
+        //if validation form returns true, continue with submission
         if(validateForm()) {
             fetch("http://localhost:3000/signup", { 
             method: 'POST',
@@ -56,15 +58,18 @@ export default function RegistrationForm() {
                 console.log(err);
             });
         } else {
+            //if form isn't legit, don't submit
             console.log('Form has errors, cannot submit.');
         }
     }
 
     return (
         <div className="registration-section">
+            <ul className="errors-list">
             {errArray.map((error) =>(
-                <span>`${error}`</span>
+                <li>`${error}`</li>
             ))}
+            </ul>
             <h2>Register:</h2>
             <form className="registration-form" onSubmit={handleSubmit}>
                 <label htmlFor="name">Full Name:</label>
