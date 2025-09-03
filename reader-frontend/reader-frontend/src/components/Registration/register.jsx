@@ -8,24 +8,56 @@ export default function RegistrationForm() {
     const [confirmPassword, setConfirmPassword] = useState('');
     const [errArray, setErrArray] = useState([]);
 
+    const validateForm = () => {
+    let newErrors = [];
+    let isValid = true;
+
+    if (!name) {
+      newErrors.push = 'Your name is required.';
+      isValid = false;
+    }
+
+    if (!username) {
+      newErrors.push = 'Username is required.';
+      isValid = false;
+    }
+
+    if (!password) {
+      newErrors.push = 'Password is required.';
+      isValid = false;
+    }
+
+    if(password !== confirmPassword) {
+      newErrors.push = 'Passwords must match.';
+      isValid = false;
+    }
+    // Add more validation rules for email, password, etc.
+
+    setErrArray(newErrors);
+    return isValid;
+  };
+
     async function handleSubmit(e) {
         e.preventDefault()
 
-        fetch("http://localhost:3000/signup", { 
+        if(validateForm()) {
+            fetch("http://localhost:3000/signup", { 
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
             },
-            body: JSON.stringify({ name, username, password }), 
-        })
-        .then((response) => {
-            console.log(response)
-            return response.json();
-        })
-        .catch((err) => {
-            console.log(err);
-        });
-
+            body: JSON.stringify({ name, username, password, confirmPassword }), 
+            })
+            .then((response) => {
+                console.log(response)
+                return response.json();
+            })
+            .catch((err) => {
+                console.log(err);
+            });
+        } else {
+            console.log('Form has errors, cannot submit.');
+        }
     }
 
     return (
@@ -68,8 +100,8 @@ export default function RegistrationForm() {
                 <label htmlFor="confirmPassword">Confirm Password:</label>
                 <input 
                     type="password"
-                    id='confirmPassword' 
-                    name='confirmPassword'
+                    id='confirmpassword' 
+                    name='confirmpassword'
                     placeholder="Passwords must match"
                     value={confirmPassword}
                     onChange={(e) => setConfirmPassword(e.target.value)}
