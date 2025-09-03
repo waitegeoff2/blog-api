@@ -1,4 +1,4 @@
-// npm install express express-session pg passport passport-local ejs dotenv express-validator @quixo3/prisma-session-store
+// npm install express express-session pg passport passport-local ejs dotenv express-validator @quixo3/prisma-session-store cors
 //REQUIRE brings  bring in external JavaScript files (modules) and make their exported functionalities available within the current file or scope. 
 const path = require("node:path");
 const express = require("express");
@@ -10,9 +10,14 @@ require('./config/passport');
 const db = require('./db/queries')
 const { PrismaSessionStore } = require('@quixo3/prisma-session-store');
 const prisma = require('./db/prisma')
+const cors = require('cors');
 
 //this allows the app to parse form data into req.
 app.use(express.urlencoded({ extended: true }));
+
+app.use(cors())
+
+app.use(express.json())
 
 //static assets path (CSS, etc.)
 const assetsPath = path.join(__dirname, "public");

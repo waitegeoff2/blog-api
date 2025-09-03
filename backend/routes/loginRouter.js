@@ -1,7 +1,7 @@
 const { Router } = require("express");
 const loginRouter = Router();
 const jwtSecret = process.env.JWT_SECRET; // Use a strong, environment variable for production
-
+const passport = require('passport')
 
 //when a post is made here (on React fill out the form and make the post request)
 //authenticate the user variables that get passed in with passport
