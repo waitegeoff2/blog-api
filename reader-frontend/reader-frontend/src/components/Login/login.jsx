@@ -43,9 +43,15 @@ export default function LoginForm() {
                 return response.json();
             })
             .then((response) => {
+                //TOKEN IS HERE, NEED TO SAVE IT TO LOCAL STORAGE
+                if(response.message == 'Unauthorized') {
+                    // add to errors array
+                    let newErrors = [];
+                    newErrors.push('Invalid credentials.')
+                    setErrArray(newErrors)
+                }
                 console.log(response)
             })
-            //SAVE TOKEN TO STORAGE
             .catch((err) => {
                 console.log(err);
             });
