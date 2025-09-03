@@ -10,6 +10,7 @@ const ExtractJwt = require('passport-jwt').ExtractJwt;
 const jwtSecret = process.env.JWT_SECRET; // Use a strong, environment variable for production
 require('dotenv').config();
 
+
 //passport middleware for username and password
 passport.use(
   new LocalStrategy(async (username, password, done) => {
@@ -20,7 +21,6 @@ passport.use(
             username: username,
         },
         });
-        console.log(user)
         //if user not in database
         if (!user) {
             console.log('no user');
@@ -34,7 +34,6 @@ passport.use(
         }
         //if successful, return the user
         console.log('logged in!')
-        console.log(user)
       return done(null, user);
     } catch(err) {
       return done(err);
