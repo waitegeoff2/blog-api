@@ -34,7 +34,6 @@ export default function RegistrationForm() {
     }
 
     setErrArray(newErrors);
-    console.log(errArray)
     return isValid;
   };
 
@@ -65,12 +64,12 @@ export default function RegistrationForm() {
 
     return (
         <div className="registration-section">
+            <h2>Register:</h2>
             <ul className="errors-list">
             {errArray.map((error) =>(
-                <li>`${error}`</li>
+                <li>{error}</li>
             ))}
             </ul>
-            <h2>Register:</h2>
             <form className="registration-form" onSubmit={handleSubmit}>
                 <label htmlFor="name">Full Name:</label>
                 <input 
