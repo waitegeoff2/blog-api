@@ -8,8 +8,12 @@ const passport = require('passport')
 //LOOK AT GOOG AI POST, PRETTY SURE THAT'S ALL YOU NEED TO KNOW (it's basically the same as the passport jwt strategy)
 loginRouter.post(
       "/",
-  passport.authenticate("local", { session: false }), (req, res) => {
-  // If authentication succeeds, generate token
+  passport.authenticate("local", { session: false, failWithError: true }), (req, res) => {
+  if(error) {
+    res.json({message: 'Invalid login info'})
+  }
+    // If authentication succeeds, generate token
+
   const payload = { id: req.user.id };
   const token = jwt.sign(payload, jwtSecret, { expiresIn: '1d' });
   res.json({ message: 'Login successful', token });
