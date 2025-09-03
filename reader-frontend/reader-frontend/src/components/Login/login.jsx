@@ -40,8 +40,10 @@ export default function LoginForm() {
             body: JSON.stringify({ username, password }), 
             })
             .then((response) => {
-                console.log(response)
                 return response.json();
+            })
+            .then((response) => {
+                console.log(response)
             })
             //SAVE TOKEN TO STORAGE
             .catch((err) => {
@@ -77,7 +79,6 @@ export default function LoginForm() {
                     type="password"
                     id='password' 
                     name='password'
-                    placeholder="Passwords must match"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     required
