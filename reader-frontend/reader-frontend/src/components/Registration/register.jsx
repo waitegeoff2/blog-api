@@ -55,6 +55,7 @@ export default function RegistrationForm() {
                     onChange={(e) => setUserName(e.target.value)}
                     required
                 />
+                <label htmlFor="password">Password:</label>
                 <input 
                     type="password"
                     id='password' 
@@ -64,6 +65,7 @@ export default function RegistrationForm() {
                     onChange={(e) => setPassword(e.target.value)}
                     required
                 />
+                <label htmlFor="confirmPassword">Confirm Password:</label>
                 <input 
                     type="password"
                     id='confirmPassword' 
@@ -73,6 +75,7 @@ export default function RegistrationForm() {
                     onChange={(e) => setConfirmPassword(e.target.value)}
                     required
                 />
+                <button type="submit">Register</button>
             </form>
         </div>
     )
