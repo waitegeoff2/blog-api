@@ -2,7 +2,7 @@ const { Router } = require("express");
 const postsRouter = Router();
 const postsController = require('../controllers/postsController')
 const passport = require("passport");
-const jwt = require('jsonwebtoken');
+require('../config/passport');
 
 postsRouter.get('/', postsController.getPosts)
 postsRouter.post('/', postsController.createPost)
