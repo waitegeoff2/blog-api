@@ -41,7 +41,7 @@ async (req, res, next) => {
         let username = req.body.username;
         let hashedPassword = await bcrypt.hash(req.body.password, 10);
         const newUser = await db.createUser(name, username, hashedPassword)
-        res.json(newUser, errors) //is this necessary?
+        res.json('User created', errors) //is this necessary?
     } catch(error) {
         next(error);
     }
