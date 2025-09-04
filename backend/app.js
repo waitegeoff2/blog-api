@@ -23,7 +23,7 @@ app.use(express.json())
 const assetsPath = path.join(__dirname, "public");
 app.use(express.static(assetsPath));
 
-//UPDATE WITH PRISMA SESSION
+//UPDATE WITH PRISMA SESSION - UNNECESSARY!!!
 app.use(
   session({
      cookie: {
@@ -45,7 +45,7 @@ app.use(
 app.use(passport.session());
 app.use(express.urlencoded({ extended: false }));
 
-//view library
+//view library - PROBABLY UNNECESSARY!!
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "ejs");
 

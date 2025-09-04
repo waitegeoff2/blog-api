@@ -16,9 +16,16 @@ loginRouter.post(
     const token = jwt.sign(payload, jwtSecret, { expiresIn: '1d' });
     console.log(token)
     return res.status(200).json({ message: 'Login successful', token: token });
-    
-   
     // If authentication succeeds, generate token
+});
+
+loginRouter.get("/logout", (req, res, next) => {
+  req.logout((err) => {
+    if (err) {
+      return next(err);
+    }
+    return res.status(200).json({ message: 'Logout successful' });
+  });
 });
 
 module.exports = loginRouter;
