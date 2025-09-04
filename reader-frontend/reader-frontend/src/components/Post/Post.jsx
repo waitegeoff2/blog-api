@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { useParams } from "react-router";
+import './Post.css'
 
 export default function Post() {
     const { postId } = useParams();
@@ -27,25 +28,28 @@ export default function Post() {
           .catch((error) => setError(error))
     }, []);
 
-        return (
-        <>
-            <div className="article-body">
-                <h1>{post.title}</h1>
-                <p>{post.body}</p>
-            </div>
-            <div className="comments-section">
-                {/* check that post comments exist, then check if there's more than one, THEN map
-                Otherwise it won't map because nothing is there initially */}
-                {post.comments && post.comments.length > 0 && (
-                    <ul>
-                    {(post.comments).map((comment, index) => (
-                    <div key={comment.id} className="commentCard">
-                        <span>{comment.content}</span>
-                    </div>
-                    ))}
-                    </ul>
-                )}
-            </div>
-        </>
-        )
+    return (
+    <>
+        <div className="article-body">
+            <h1>{post.title}</h1>
+            <p>{post.body}</p>
+        </div>
+        <h2>Comments</h2>
+        <div className="comments-section">
+            {/* check that post comments exist, then check if there's more than one, THEN map
+            Otherwise it won't map because nothing is there initially */}
+            {post.comments && post.comments.length > 0 && (
+                <ul>
+                {(post.comments).map((comment, index) => (
+                <div key={comment.id} className="commentCard">
+                    <span>{comment.content}</span>
+                    <span>By: {comment.author.name}</span>
+                </div>
+                ))}
+                </ul>
+            )}
+        </div>
+        <button>Add Comment</button>
+    </>
+    )
 }
