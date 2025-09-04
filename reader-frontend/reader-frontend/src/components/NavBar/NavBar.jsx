@@ -7,7 +7,13 @@ export default function NavBar() {
         <>
             <div className="navBar">
                 <div className="navLinks">
-                    {/* LINKS TO LOGIN AND REGISTER */}
+                    <div className="leftLinks">
+                        <Link to ="/">Home</Link>
+                    </div>
+                    <div className="rightLinks">
+                        <Link to ="register">Register</Link>
+                        <Link to ="login">Login</Link>
+                    </div>
                 </div>
             </div>
         </>

@@ -42,13 +42,16 @@ export default function LoginForm() {
             .then((response) => {
                 return response.json();
             })
-            .then((response) => {
-                //TOKEN IS HERE, NEED TO SAVE IT TO LOCAL STORAGE
+            .then((response) => {   
                 if(response.message == 'Unauthorized') {
                     // add to errors array
                     let newErrors = [];
                     newErrors.push('Invalid credentials.')
                     setErrArray(newErrors)
+                } else {
+                    let data = response.token
+                    localStorage.setItem('jwtToken', data)
+                    console.log("token put into localStorage")
                 }
                 console.log(response)
             })
