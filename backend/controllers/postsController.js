@@ -27,6 +27,8 @@ async function getSinglePost(req, res) {
 //find an author's posts
 //id will be pulled from JWT TOKEN
 async function getUserPosts(req, res){ 
+    //***should be available in req.users because it was sent with a JWT
+    
     // try {
     // //const userId = GET FROM JWT TOKEN
     // //const posts = await db.getUserPosts(userId)
