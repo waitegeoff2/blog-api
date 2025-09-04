@@ -1,5 +1,6 @@
 import './Articles.css'
 import { useEffect, useState } from "react";
+import { Link } from 'react-router';
 
 export default function Articles() {
     const [articles, setArticles] = useState([]);
@@ -12,7 +13,7 @@ export default function Articles() {
             headers: {
               'Content-Type': 'application/json',
             },
-            body: JSON.stringify({ name, username, password, confirmPassword }), 
+            
             })
       .then((response) => {
         if (response.status >= 400) {
@@ -23,17 +24,20 @@ export default function Articles() {
       .then((response) => {   
             console.log(response)
             setArticles(response)
+            
        })
       .catch((error) => setError(error))
     }, []);
 
     return (
-        // <div className="articles-section">
-        //     {articles.map((article, index) =>(
-        //             return ( 
-                        
-                    // )
-        //     ))}
-        // </div>
+        <div className="articles-section">
+            {articles.map((article, index) =>(
+                <div className="articleCard">
+                    <Link to={`/posts/${article.id}`}>{article.title}</Link>
+                    <span>Author: {article.author.name}</span>
+                    <span>Created on: {article.postTime}</span>
+                </div>
+            ))}
+        </div>
     )
 }

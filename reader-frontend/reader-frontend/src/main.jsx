@@ -1,6 +1,6 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
-import { createBrowserRouter, RouterProvider } from "react-router";
+import { createBrowserRouter, RouterProvider, Navigate } from "react-router";
 import './index.css'
 import App from './App.jsx'
 import Login from './components/Login/Login.jsx';
@@ -13,8 +13,8 @@ const router = createBrowserRouter([
     element: <App />,
     children: [
        { index: true, element: <Navigate to="/posts" replace /> },
-       { path: '/posts', element: <Articles /> },
-       { path: '/posts/:postId', element: <Post /> },
+       { path: 'posts', element: <Articles /> },
+      //  { path: 'posts/:postId', element: <Post /> },
        { path: 'login', element: <Login /> },
        { path: 'register', element: <Register /> },
     ],
