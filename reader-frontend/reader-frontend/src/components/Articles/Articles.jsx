@@ -32,7 +32,7 @@ export default function Articles() {
     return (
         <div className="articles-section">
             {articles.map((article, index) =>(
-                <div className="articleCard">
+                <div key={article.id} className="articleCard">
                     <Link to={`/posts/${article.id}`}>{article.title}</Link>
                     <span>Author: {article.author.name}</span>
                     <span>Created on: {article.postTime}</span>

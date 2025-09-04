@@ -1,20 +1,18 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useParams } from "react-router";
 
 export default function Post() {
-    const { articleId } = useParams();
-    console.log(articleId)
+    const { postId } = useParams();
+    console.log(postId)
 
-    const [post, setPost] = useState();
+    const [post, setPost] = useState([]);
     const [error, setError] = useState();
 
     //useEffect to get post with post id (PARAM)
     useEffect(() => {
-        fetch(`http://localhost:3000/posts/${articleId}`, { 
+        fetch(`http://localhost:3000/posts/${postId}`, { 
                 method: 'GET',
-                headers: {
-                  'Content-Type': 'application/json',
-                },
+                
                 })
           .then((response) => {
             if (response.status >= 400) {
@@ -24,13 +22,27 @@ export default function Post() {
           })
           .then((response) => {   
                 console.log(response)
+                console.log(response.comments)
                 setPost(response)
                 
            })
           .catch((error) => setError(error))
-        }, []);
+    }, []);
 
-        // return (
+        return (
+        <>
+            <div className="article-body">
+                <h1>{post.title}</h1>
+                <p>{post.body}</p>
+            </div>
+            <div className="comments-section">
+                {/* {(post.comments).map((comment, index) =>(
+                <div key={comment.id} className="commentCard">
 
-        // )
+                    <span>{comment.content}</span>
+                </div>
+                ))} */}
+            </div>
+        </>
+        )
 }
