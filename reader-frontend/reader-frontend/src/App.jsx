@@ -15,6 +15,7 @@ function App() {
   return (
     <>
       <NavBar />
+      {/* renders wherever you are on the outlet links from the parent component (in this case, App) */}
       <Outlet />
     </>
   )

@@ -50,8 +50,10 @@ export default function RegistrationForm() {
             body: JSON.stringify({ name, username, password, confirmPassword }), 
             })
             .then((response) => {
-                console.log(response)
                 return response.json();
+            })
+            .then((response) => {   
+                console.log(response)
             })
             .catch((err) => {
                 console.log(err);
