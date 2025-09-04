@@ -3,7 +3,6 @@ import { useParams } from "react-router";
 
 export default function Post() {
     const { postId } = useParams();
-    console.log(postId)
 
     const [post, setPost] = useState([]);
     const [error, setError] = useState();
@@ -22,7 +21,6 @@ export default function Post() {
           })
           .then((response) => {   
                 console.log(response)
-                console.log(response.comments)
                 setPost(response)
                 
            })
@@ -36,12 +34,17 @@ export default function Post() {
                 <p>{post.body}</p>
             </div>
             <div className="comments-section">
-                {/* {(post.comments).map((comment, index) =>(
-                <div key={comment.id} className="commentCard">
-
-                    <span>{comment.content}</span>
-                </div>
-                ))} */}
+                {/* check that post comments exist, then check if there's more than one, THEN map
+                Otherwise it won't map because nothing is there initially */}
+                {post.comments && post.comments.length > 0 && (
+                    <ul>
+                    {(post.comments).map((comment, index) => (
+                    <div key={comment.id} className="commentCard">
+                        <span>{comment.content}</span>
+                    </div>
+                    ))}
+                    </ul>
+                )}
             </div>
         </>
         )
