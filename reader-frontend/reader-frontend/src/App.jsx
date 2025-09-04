@@ -6,11 +6,10 @@ import Login from './components/Login/Login'
 import NavBar from './components/NavBar/NavBar'
 
 function App() {
-  //if is logged in, show the add comments button
+  //don't think NECESSARY
   const [isLoggedIn, setIsLoggedIn] = useState();
   //pass user details through the app to use them
   const [user, setUser] = useState();
-  const [jwtToken, setJwtToken] = useState();
 
   useEffect(() => {
     //take jwt out of local storage
@@ -36,6 +35,11 @@ function App() {
     });
     }
   }, []);
+
+  function userLogout() {
+        //for when a userlogs out, set user to null
+  }
+
 
   return (
     <>

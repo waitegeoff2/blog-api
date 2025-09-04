@@ -2,7 +2,8 @@ import { useState, useEffect } from "react";
 import { useParams } from "react-router";
 import './Post.css'
 
-export default function Post() {
+//add props for USER
+export default function Post({ user }) {
     const { postId } = useParams();
 
     const [post, setPost] = useState([]);

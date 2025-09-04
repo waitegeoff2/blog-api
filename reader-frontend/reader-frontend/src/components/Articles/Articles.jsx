@@ -29,9 +29,13 @@ export default function Articles() {
       .catch((error) => setError(error))
     }, []);
 
+    function userLogout() {
+        //for when a userlogs out, set user to null
+    }
+
     return (
         <div className="articles-section">
-            {articles.map((article, index) =>(
+            {articles.map((article, index) => (
                 <div key={article.id} className="articleCard">
                     <Link to={`/posts/${article.id}`}>{article.title}</Link>
                     <span>Author: {article.author.name}</span>

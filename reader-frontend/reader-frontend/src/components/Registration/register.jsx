@@ -9,33 +9,33 @@ export default function RegistrationForm() {
     const [errArray, setErrArray] = useState([]);
 
     const validateForm = () => {
-    let newErrors = [];
-    let isValid = true;
+        let newErrors = [];
+        let isValid = true;
 
-    //validations
-    if (!name) {
-      newErrors.push('Your name is required.');
-      isValid = false;
-    }
+        //validations
+        if (!name) {
+            newErrors.push('Your name is required.');
+            isValid = false;
+        }
 
-    if (!username) {
-      newErrors.push('Username is required.');
-      isValid = false;
-    }
+        if (!username) {
+            newErrors.push('Username is required.');
+            isValid = false;
+        }
 
-    if (!password) {
-      newErrors.push('Password is required.');
-      isValid = false;
-    }
+        if (!password) {
+            newErrors.push('Password is required.');
+            isValid = false;
+        }
 
-    if(password !== confirmPassword) {
-      newErrors.push('Passwords must match.');
-      isValid = false;
-    }
+        if(password !== confirmPassword) {
+            newErrors.push('Passwords must match.');
+            isValid = false;
+        }
 
-    setErrArray(newErrors);
-    return isValid;
-  };
+        setErrArray(newErrors);
+        return isValid;
+    };
 
     async function handleSubmit(e) {
         e.preventDefault()
