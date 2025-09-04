@@ -49,14 +49,19 @@ async function getPosts() {
 //get a post (include author and comments)
 async function getSinglePost(postId) {
     try {
-        const post = parseInt(postId)
+        const postIdentity = parseInt(postId)
+        console.log(postIdentity)
         const singlePost = await prisma.post.findFirst({
             where: {
-                id: post,
+                id: postIdentity,
             },
             include: {
                 author: true,
-                comments: true,
+                comments: {
+                    include: {
+                        author: true,
+                    },
+                },
             },
             // select: {
             //         id: true,

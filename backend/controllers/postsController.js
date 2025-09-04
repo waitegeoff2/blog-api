@@ -14,7 +14,8 @@ async function getPosts(req, res, next) {
 //clicking on post, you get the post info, author info, and comments
 async function getSinglePost(req, res) {
     try {
-        const postId = req.params.postId;
+        console.log(req.params)
+        const postId = parseInt(req.params.postId);
         const post = await db.getSinglePost(postId)
         // const returnedFiles = files[0];
         res.json(post)
