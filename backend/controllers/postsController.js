@@ -65,10 +65,12 @@ async function deletePost(req, res){
 //post comment
 async function postComment(req, res){
     try{
-        const postId = req.params.postId
+        console.log(req.body)
+        const postId = parseInt(req.params.postId)
+        const authorId = req.body.user.id;
         const content = req.body.content
 
-        await db.postComment(postId, content)
+        await db.postComment(postId, authorId, content)
     } catch (error) {
         next(error)
     }    

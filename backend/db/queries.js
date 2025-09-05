@@ -129,7 +129,7 @@ async function deletePost(postId){
 }
 
 //post a comment
-async function postComment(postId, content){
+async function postComment(postId, author, content){
     try {
 
     const authorId = await prisma.post.findFirst({
@@ -145,7 +145,7 @@ async function postComment(postId, content){
         data: {
             postId: postId,
             content: content,
-            authorId: authorId.authorId,
+            authorId: author,
         }
     })
     }
