@@ -30,13 +30,17 @@ export default function Articles() {
 
     return (
         <div className="articles-section">
-            {articles.map((article, index) => (
-                <div key={article.id} className="articleCard">
-                    <Link to={`/posts/${article.id}`}>{article.title}</Link>
-                    <span>Author: {article.author.name}</span>
-                    <span>Created on: {article.postTime}</span>
-                </div>
-            ))}
+            <h1 className='blog-title'>Blog posts</h1>
+            <h2>Fake blog</h2>
+            <div className="articles-list">
+                {articles.map((article, index) => (
+                    <div key={article.id} className="articleCard">
+                        <h2><Link to={`/posts/${article.id}`}>{article.title}</Link></h2>
+                        <span><b>Author:</b> {article.author.name}</span>
+                        <span><b>Created on:</b> {article.postTime}</span>
+                    </div>
+                ))}
+            </div>
         </div>
     )
 }

@@ -13,14 +13,13 @@ export default function Post() {
  
     console.log(user)
 
+    const navigate = useNavigate();
 
 
     const [post, setPost] = useState([]);
     const [error, setError] = useState();
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [content, setContent] = useState('');
-    const [rerender, setRerender] = useState('')
-
 
     //useEffect to get post with post id (PARAM)
     useEffect(() => {
@@ -35,8 +34,7 @@ export default function Post() {
             return response.json();
           })
           .then((response) => {   
-                setPost(response)
-                
+                setPost(response) 
            })
           .catch((error) => setError(error))
     }, []);
@@ -63,7 +61,7 @@ export default function Post() {
         })
         .then((response) => {   
             console.log(response)
-            setRerender('new')
+            navigate(`/posts/${postId}`)
         })
         .catch((err) => {
             console.log(err);
