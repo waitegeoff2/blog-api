@@ -71,6 +71,7 @@ async function postComment(req, res){
         const content = req.body.content
 
         await db.postComment(postId, authorId, content)
+        res.json({message: 'Comment posted'})
     } catch (error) {
         next(error)
     }    

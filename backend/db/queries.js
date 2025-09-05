@@ -131,15 +131,15 @@ async function deletePost(postId){
 //post a comment
 async function postComment(postId, author, content){
     try {
-
-    const authorId = await prisma.post.findFirst({
-        where: {
-            id: postId,
-        },
-        select: {
-            authorId: true,
-        }
-    })
+    //     //is this necessary????
+    // const authorId = await prisma.post.findFirst({
+    //     where: {
+    //         id: postId,
+    //     },
+    //     select: {
+    //         authorId: true,
+    //     }
+    // })
 
     await prisma.comment.create({
         data: {
