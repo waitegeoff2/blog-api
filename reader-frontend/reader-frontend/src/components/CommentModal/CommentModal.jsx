@@ -13,7 +13,7 @@ const Modal = ({ isOpen, onClose, children }) => {
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
-        zIndex: 1000, // Ensure it's above other content
+        zIndex: 1000,
       }}
       onClick={onClose} // Close on overlay click
     >

@@ -10,8 +10,6 @@ export default function Post() {
 
     const {user} = useOutletContext();
     const { postId } = useParams();
- 
-    console.log(user)
 
     const navigate = useNavigate();
 
@@ -33,7 +31,8 @@ export default function Post() {
             }
             return response.json();
           })
-          .then((response) => {   
+          .then((response) => {
+                console.log(response)   
                 setPost(response) 
            })
           .catch((error) => setError(error))
@@ -72,27 +71,34 @@ export default function Post() {
 
     return (
     <>
-        <div className="article-body">
-            <h1>{post.title}</h1>
-            <p>{post.body}</p>
-        </div>
-        <h2>Comments</h2>
-        <div className="comments-section">
-            {/* check that post comments exist, then check if there's more than one, THEN map
-            Otherwise it won't map because nothing is there initially */}
-            {post.comments && post.comments.length > 0 && (
-                <ul>
-                {(post.comments).map((comment, index) => (
-                <div key={comment.id} className="commentCard">
-                    <span>{comment.content}</span>
-                    <span>By: {comment.author.name}</span>
+        <div className="article-page">
+            <div className="article-body">
+                <h1>{post.title}</h1>
+                {/* waits for post.author to exist before displaying
+                because it doesn't exist on initial render */}
+                <h2>By: {post.author && post.author.name}</h2>
+                <p>{post.body}</p>
+            </div>
+            
+            <div className="comments-section">
+                <h2>Comments</h2>
+                {/* check that post comments exist, then check if there's more than one, THEN map
+                Otherwise it won't map because nothing is there initially */}
+                {post.comments && post.comments.length > 0 && (
+                    <ul>
+                    {(post.comments).map((comment, index) => (
+                    <div key={comment.id} className="commentCard">
+                        <span>{comment.content}</span>
+                        <span><b>By:</b> {comment.author.name}</span>
+                    </div>
+                    ))}
+                    </ul>
+                )}
+                <div className='leaveComment'>
+                    {user ? ( <button onClick={openModal}>Add Comment</button> ) : ( <span>Login to leave a comment!</span> ) }
                 </div>
-                ))}
-                </ul>
-            )}
-        </div>
-        <div className='leaveComment'>
-        {user ? ( <button onClick={openModal}>Add Comment</button> ) : ( <span>Login to leave a comment!</span> ) }
+            </div>
+    
         </div>
         <CommentModal isOpen={isModalOpen} onClose={closeModal}>
             <h2>Add comment</h2>
