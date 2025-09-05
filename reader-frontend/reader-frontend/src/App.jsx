@@ -9,7 +9,7 @@ function App() {
   //don't think NECESSARY
   const [isLoggedIn, setIsLoggedIn] = useState();
   //pass user details through the app to use them
-  const [user, setUser] = useState();
+  const [user, setUser] = useState(null);
 
   useEffect(() => {
     //take jwt out of local storage
@@ -45,7 +45,9 @@ function App() {
     <>
       <NavBar />
       {/* renders wherever you are on the outlet links from the parent component (in this case, App) */}
-      <Outlet context={user}/>
+      {/* NEXT: PASS USER into Post component and then use it to display add comment button */}
+      {/* SEE USE OUTLET CONTEXT in shopping cart app (Shop component) to accept context from parent components */}
+      <Outlet context={[user, setUser]}/>
     </>
   )
 }

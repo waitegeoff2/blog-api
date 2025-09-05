@@ -29,10 +29,6 @@ export default function Articles() {
       .catch((error) => setError(error))
     }, []);
 
-    function userLogout() {
-        //for when a userlogs out, set user to null
-    }
-
     return (
         <div className="articles-section">
             {articles.map((article, index) => (

@@ -29,6 +29,10 @@ export default function Post({ user }) {
           .catch((error) => setError(error))
     }, []);
 
+    function handleCommentBtn() {
+        
+    }
+
     return (
     <>
         <div className="article-body">
@@ -50,7 +54,7 @@ export default function Post({ user }) {
                 </ul>
             )}
         </div>
-        <button>Add Comment</button>
+        {user !== null ? <button>Add Comment</button> : <span>Login to leave a comment!</span>}
     </>
     )
 }
