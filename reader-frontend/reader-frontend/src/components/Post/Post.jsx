@@ -10,6 +10,10 @@ export default function Post() {
 
     const {user} = useOutletContext();
     const { postId } = useParams();
+ 
+    console.log(user)
+
+
 
     const [post, setPost] = useState([]);
     const [error, setError] = useState();
@@ -52,7 +56,7 @@ export default function Post() {
         headers: {
             'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ content }), 
+        body: JSON.stringify({ content: content, user: user }), 
         })
         .then((response) => {
             return response.json();
@@ -104,6 +108,11 @@ export default function Post() {
                     value={content}
                     onChange={(e) => setContent(e.target.value)}
                     required
+                />
+                <input
+                    type="hidden"
+                    name="hiddenField"
+                    value={user}
                 />
                 <button type="submit">Submit</button>
             </form>

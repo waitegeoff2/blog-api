@@ -27,8 +27,7 @@ function App() {
       .then((response) => {
         //server responds with data about the user
         //extracted from JWT
-        console.log(response)
-        setUser(response)
+        setUser(response.userData)
       })
       .catch((error) => {
           console.error("Token fetch failed", error);

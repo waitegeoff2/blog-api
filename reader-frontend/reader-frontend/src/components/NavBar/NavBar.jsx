@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom'
 export default function NavBar({user, setUser, setTriggerJwt}) {
 
 
-    console.log(user)
     function handleLogOut() {
         fetch("http://localhost:3000/login/logout", { 
             method: 'GET',
