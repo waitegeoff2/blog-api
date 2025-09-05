@@ -2,6 +2,8 @@ import { useState, useEffect } from "react";
 import { useParams } from "react-router";
 import './Post.css'
 import { useOutletContext } from "react-router";
+import CommentModal from '../CommentModal/CommentModal'
+import { useNavigate } from "react-router";
 
 //add props for USER
 export default function Post() {
@@ -11,6 +13,10 @@ export default function Post() {
 
     const [post, setPost] = useState([]);
     const [error, setError] = useState();
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [content, setContent] = useState('');
+    const [rerender, setRerender] = useState('')
+
 
     //useEffect to get post with post id (PARAM)
     useEffect(() => {
@@ -31,9 +37,36 @@ export default function Post() {
           .catch((error) => setError(error))
     }, []);
 
-    function handleCommentBtn() {
+    function openModal() {
+        setIsModalOpen(true);
+    }
+
+    const closeModal = () => setIsModalOpen(false);
+
+    async function handleSubmit(e) {
+        setIsModalOpen(false)
+        e.preventDefault()
+
+        fetch(`http://localhost:3000/posts/${postId}`, { 
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ content }), 
+        })
+        .then((response) => {
+            return response.json();
+        })
+        .then((response) => {   
+            console.log(response)
+            setRerender('new')
+        })
+        .catch((err) => {
+            console.log(err);
+        });
 
     }
+
 
     return (
     <>
@@ -57,8 +90,24 @@ export default function Post() {
             )}
         </div>
         <div className='leaveComment'>
-        {user ? ( <button>Add Comment</button> ) : ( <span>Login to leave a comment!</span> ) }
+        {user ? ( <button onClick={openModal}>Add Comment</button> ) : ( <span>Login to leave a comment!</span> ) }
         </div>
+        <CommentModal isOpen={isModalOpen} onClose={closeModal}>
+            <h2>Add comment</h2>
+            <form className="registration-form" onSubmit={handleSubmit}>
+                <label htmlFor="name">Comment:</label>
+                <input 
+                    type="text"
+                    id='content' 
+                    name='content'
+                    placeholder="Your comment here"
+                    value={content}
+                    onChange={(e) => setContent(e.target.value)}
+                    required
+                />
+                <button type="submit">Submit</button>
+            </form>
+        </CommentModal>
     </>
     )
 }
