@@ -1,10 +1,12 @@
 import './NavBar.css'
 import { Link } from 'react-router-dom'
 
-export default function NavBar() {
+export default function NavBar({user, setUser, setTriggerJwt}) {
 
+
+    console.log(user)
     function handleLogOut() {
-        fetch("http://localhost:3000/logout", { 
+        fetch("http://localhost:3000/login/logout", { 
             method: 'GET',
             headers: {
               'Content-Type': 'application/json',
@@ -12,9 +14,12 @@ export default function NavBar() {
             })
             .then((response) => {
                 return response.json();
+                
             })
             .then((response) => {   
                 console.log(response)
+                localStorage.removeItem("jwtToken")
+                setTriggerJwt('logged out')
             })
             .catch((err) => {
                 console.log(err);
@@ -31,7 +36,7 @@ export default function NavBar() {
                     <div className="rightLinks">
                         <Link to ="register">Register</Link>
                         <Link to ="login">Login</Link>
-                        <a onClick={handleLogOut}>Log Out</a>
+                        <button className='logOutBtn' onClick={handleLogOut}>Log Out</button>
                     </div>
                 </div>
             </div>

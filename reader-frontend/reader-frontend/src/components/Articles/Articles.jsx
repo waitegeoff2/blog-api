@@ -22,7 +22,6 @@ export default function Articles() {
         return response.json();
       })
       .then((response) => {   
-            console.log(response)
             setArticles(response)
             
        })

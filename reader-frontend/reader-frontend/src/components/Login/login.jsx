@@ -1,11 +1,14 @@
 import { useState } from "react";
 import './Login.css'
+import { useOutletContext } from "react-router";
 
 export default function LoginForm() {
     //handle submit (make post request to api, get JWT token back)
+    const{setTriggerJwt} = useOutletContext();
     const [username, setUserName] = useState('');
     const [password, setPassword] = useState('');
     const [errArray, setErrArray] = useState([]);
+
 
     const validateForm = () => {
         let newErrors = [];
@@ -29,7 +32,6 @@ export default function LoginForm() {
 
    async function handleSubmit(e) {
         e.preventDefault()
-
         //if validation form returns true, continue with submission
         if(validateForm()) {
             fetch("http://localhost:3000/login", { 
@@ -51,6 +53,7 @@ export default function LoginForm() {
                 } else {
                     let data = response.token
                     localStorage.setItem('jwtToken', data)
+                    setTriggerJwt('new')
                     console.log("token put into localStorage")
                 }
                 console.log(response)

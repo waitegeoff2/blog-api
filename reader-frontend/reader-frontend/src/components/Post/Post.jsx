@@ -1,9 +1,12 @@
 import { useState, useEffect } from "react";
 import { useParams } from "react-router";
 import './Post.css'
+import { useOutletContext } from "react-router";
 
 //add props for USER
-export default function Post({ user }) {
+export default function Post() {
+
+    const {user} = useOutletContext();
     const { postId } = useParams();
 
     const [post, setPost] = useState([]);
@@ -22,7 +25,6 @@ export default function Post({ user }) {
             return response.json();
           })
           .then((response) => {   
-                console.log(response)
                 setPost(response)
                 
            })
@@ -30,7 +32,7 @@ export default function Post({ user }) {
     }, []);
 
     function handleCommentBtn() {
-        
+
     }
 
     return (
@@ -54,7 +56,9 @@ export default function Post({ user }) {
                 </ul>
             )}
         </div>
-        {user !== null ? <button>Add Comment</button> : <span>Login to leave a comment!</span>}
+        <div className='leaveComment'>
+        {user ? ( <button>Add Comment</button> ) : ( <span>Login to leave a comment!</span> ) }
+        </div>
     </>
     )
 }

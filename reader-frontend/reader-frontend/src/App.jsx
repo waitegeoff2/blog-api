@@ -10,6 +10,7 @@ function App() {
   const [isLoggedIn, setIsLoggedIn] = useState();
   //pass user details through the app to use them
   const [user, setUser] = useState(null);
+  const [triggerJwt, setTriggerJwt] = useState(null);
 
   useEffect(() => {
     //take jwt out of local storage
@@ -31,10 +32,13 @@ function App() {
       })
       .catch((error) => {
           console.error("Token fetch failed", error);
-          localStorage.removeItem("jwt-token"); // remove bad token
+          localStorage.removeItem("jwtToken"); // remove bad token
     });
+    } else {
+      console.log('no token')
+      setUser(null)
     }
-  }, []);
+  }, [triggerJwt]);
 
   function userLogout() {
         //for when a userlogs out, set user to null
@@ -43,11 +47,11 @@ function App() {
 
   return (
     <>
-      <NavBar />
+      <NavBar user={user} setUser={setUser} setTriggerJwt={setTriggerJwt} />
       {/* renders wherever you are on the outlet links from the parent component (in this case, App) */}
       {/* NEXT: PASS USER into Post component and then use it to display add comment button */}
       {/* SEE USE OUTLET CONTEXT in shopping cart app (Shop component) to accept context from parent components */}
-      <Outlet context={[user, setUser]}/>
+      <Outlet context={{user, setUser, triggerJwt, setTriggerJwt}}/>
     </>
   )
 }
