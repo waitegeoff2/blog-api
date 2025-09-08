@@ -18,6 +18,7 @@ export default function Post() {
     const [error, setError] = useState();
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [content, setContent] = useState('');
+    const [reRender, setRerender] = useState(1);
 
     //useEffect to get post with post id (PARAM)
     useEffect(() => {
@@ -36,7 +37,7 @@ export default function Post() {
                 setPost(response) 
            })
           .catch((error) => setError(error))
-    }, []);
+    }, [reRender]);
 
     function openModal() {
         setIsModalOpen(true);
@@ -60,7 +61,9 @@ export default function Post() {
         })
         .then((response) => {   
             console.log(response)
-            navigate(`/posts/${postId}`)
+            //trigger a page rerender each time
+            const newValue = reRender + 1
+            setRerender(newValue)
         })
         .catch((err) => {
             console.log(err);
@@ -85,17 +88,17 @@ export default function Post() {
                 {/* check that post comments exist, then check if there's more than one, THEN map
                 Otherwise it won't map because nothing is there initially */}
                 {post.comments && post.comments.length > 0 && (
-                    <ul>
+                    <ul className='comments-list'>
                     {(post.comments).map((comment, index) => (
-                    <div key={comment.id} className="commentCard">
-                        <span>{comment.content}</span>
-                        <span><b>By:</b> {comment.author.name}</span>
-                    </div>
+                        <div key={comment.id} className="commentCard">
+                            <span><b>{comment.author.name}</b></span>
+                            <span>{comment.content}</span>
+                        </div>
                     ))}
                     </ul>
                 )}
                 <div className='leaveComment'>
-                    {user ? ( <button onClick={openModal}>Add Comment</button> ) : ( <span>Login to leave a comment!</span> ) }
+                    {user ? ( <button onClick={openModal}>Add Comment</button> ) : ( <span><b>Login to leave a comment!</b></span> ) }
                 </div>
             </div>
     

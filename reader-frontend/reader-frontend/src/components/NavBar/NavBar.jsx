@@ -34,8 +34,9 @@ export default function NavBar({user, setUser, setTriggerJwt}) {
                     </div>
                     <div className="rightLinks">
                         <Link to ="register">Register</Link>
-                        <Link to ="login">Login</Link>
-                        <button className='logOutBtn' onClick={handleLogOut}>Log Out</button>
+                        {/* <Link to ="login">Login</Link>
+                        <button className='logOutBtn' onClick={handleLogOut}>Log Out</button> */}
+                        {user ? ( <button className='logOutBtn' onClick={handleLogOut}>Log Out</button> ) : ( <Link to ="login">Login</Link> ) }
                     </div>
                 </div>
             </div>

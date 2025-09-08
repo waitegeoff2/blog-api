@@ -4,21 +4,28 @@
     padding: 20px;
 }
 
-.commentCard {
-    display: flex;
-    flex-direction: column;
-    border: 1px solid black;
-    padding: 10px;
-    width: 50%;
-}
-
 .comments-section {
     display: flex;
     flex-direction: column;
-    gap: 5px;
+    gap: 10px;
     width: 50%;
+    background-color: rgb(199, 198, 198);
+    border-radius: 5px;
+    padding: 10px;
+    
+}
+
+.comments-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
 }
 
 .commentCard {
+    display: flex;
+    flex-direction: column;
+    border-bottom: 1px solid black;
+    width: 100%;
+    
     
 }

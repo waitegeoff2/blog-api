@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router";
 
 export default function RegistrationForm() {
     //handle submit (make post request to api, update user)
@@ -7,6 +8,8 @@ export default function RegistrationForm() {
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
     const [errArray, setErrArray] = useState([]);
+
+    const navigate = useNavigate()
 
     const validateForm = () => {
         let newErrors = [];
@@ -54,6 +57,7 @@ export default function RegistrationForm() {
             })
             .then((response) => {   
                 console.log(response)
+                navigate('/');
             })
             .catch((err) => {
                 console.log(err);

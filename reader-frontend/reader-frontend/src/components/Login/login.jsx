@@ -1,6 +1,6 @@
 import { useState } from "react";
 import './Login.css'
-import { useOutletContext } from "react-router";
+import { useOutletContext, useNavigate } from "react-router";
 
 export default function LoginForm() {
     //handle submit (make post request to api, get JWT token back)
@@ -8,6 +8,8 @@ export default function LoginForm() {
     const [username, setUserName] = useState('');
     const [password, setPassword] = useState('');
     const [errArray, setErrArray] = useState([]);
+
+    const navigate = useNavigate();
 
 
     const validateForm = () => {
@@ -55,6 +57,7 @@ export default function LoginForm() {
                     localStorage.setItem('jwtToken', data)
                     setTriggerJwt('new')
                     console.log("token put into localStorage")
+                    navigate('/');
                 }
                 console.log(response)
             })
@@ -71,31 +74,35 @@ export default function LoginForm() {
     <div className="registration-section">
             <h2>Login:</h2>
             <ul className="errors-list">
-            {errArray.map((error) =>(
-                <li>{error}</li>
-            ))}
+                {errArray.map((error) =>(
+                    <li>{error}</li>
+                ))}
             </ul>
             <form className="registration-form" onSubmit={handleSubmit}>
-                <label htmlFor="name">Username:</label>
-                <input 
-                    type="email"
-                    id='username' 
-                    name='username'
-                    placeholder="Your email (aaa@aaa.com)"
-                    value={username}
-                    onChange={(e) => setUserName(e.target.value)}
-                    required
-                />
-                <label htmlFor="password">Password:</label>
-                <input 
-                    type="password"
-                    id='password' 
-                    name='password'
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    required
-                />
-                <button type="submit">Login</button>
+                <div className="form-section">
+                    <label htmlFor="name">Username:</label>
+                    <input
+                        type="email"
+                        id='username'
+                        name='username'
+                        placeholder="Your email (aaa@aaa.com)"
+                        value={username}
+                        onChange={(e) => setUserName(e.target.value)}
+                        required
+                    />
+                </div>
+                <div className="form-section">
+                    <label htmlFor="password">Password:</label>
+                    <input
+                        type="password"
+                        id='password'
+                        name='password'
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                        required
+                    />
+                </div>
+                <button className="submit-btn" type="submit">Login</button>
             </form>
         </div>
     )
