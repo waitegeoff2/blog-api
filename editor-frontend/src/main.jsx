@@ -15,12 +15,12 @@ const router = createBrowserRouter([
     element: <App />,
     //update routes
     children: [
-       { index: true, element: <Navigate to="/posts" replace /> },
-       { path: 'posts', element: <Articles /> },
+      //  { index: true, element: <Navigate to="yourposts" replace /> },
+      //  { path: 'posts', element: <Articles /> },
        { path: 'yourposts', element: <AuthorArticles /> },
-       { path: 'posts/:postId', element: <Post /> },
-       { path: 'login', element: <Login /> },
-       { path: 'register', element: <Register /> },
+      //  { path: 'posts/:postId', element: <Post /> },
+      //  { path: 'login', element: <Login /> },
+      //  { path: 'register', element: <Register /> },
     ],
   },
 ]);
