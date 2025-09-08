@@ -5,6 +5,7 @@ const passport = require("passport");
 require('../config/passport');
 
 //this is to get user data using id from JWT token, thus should be protected
+//passport decodes the jwt, and then attaches the info to req.user
 userRouter.get('/userinfo', passport.authenticate('jwt', { session: false }), userController.getUserData)
 
 userRouter.post('/signup', userController.createUser)
