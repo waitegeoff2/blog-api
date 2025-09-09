@@ -32,7 +32,7 @@ model Post {
   authorId    Int
 
   title  String   @db.VarChar(255)
-  body   String
+  body   String    @db.Text //for longer text content
   published   Boolean  @default(false)
   postTime  DateTime  @db.Date
   comments   Comment[]

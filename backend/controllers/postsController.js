@@ -27,7 +27,9 @@ async function getSinglePost(req, res) {
 //find an author's posts: need to get published and unpublished
 //try to get BOTH PUBLISHED AND UNPUBLISHED HERE
 async function getUserPosts(req, res){ 
+    console.log('user posts')
     const user = req.users;
+
     //***should be available in req.users because it was sent with a JWT
     
     // try {
