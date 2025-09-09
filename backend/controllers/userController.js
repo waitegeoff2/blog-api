@@ -6,7 +6,6 @@ const db = require('../db/queries')
 async function getUserData(req, res, next) {
     //get the user data from the decoded JWT which is attached to req.user
     try {
-        console.log(req.user)
         let userData = req.user;
         res.status(200).json({ userData })
     } catch(error) {

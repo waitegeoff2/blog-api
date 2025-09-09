@@ -26,9 +26,18 @@ async function getSinglePost(req, res) {
 
 //find an author's posts: need to get published and unpublished
 //try to get BOTH PUBLISHED AND UNPUBLISHED HERE
-async function getUserPosts(req, res){ 
-    console.log('user posts')
-    const user = req.users;
+async function getUserPosts(req, res, next){ 
+try {
+        console.trace(req.user)
+        let userData = req.user;
+        let userId = req.user.id;
+        let userPosts = await db.getUserPosts(userId)
+        //returns both unpublished and published posts in different arrays
+        res.status(200).json({ userPosts })
+
+    } catch(error) {
+        next(error);
+    }
 
     //***should be available in req.users because it was sent with a JWT
     

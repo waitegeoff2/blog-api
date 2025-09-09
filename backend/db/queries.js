@@ -32,10 +32,13 @@ async function becomeAuth(userId){
 }
 
 //POST QUERIES
-//find all posts with authors
+//find all PUBLISHED posts with authors
 async function getPosts() {
     try {
         const posts = await prisma.post.findMany({
+            // where: {
+            //     published: true,
+            // },
             include: {
                 author: true,
             }
