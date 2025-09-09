@@ -39,7 +39,8 @@ export default function AuthorArticles() {
             })
             .then((response) => {   
                 console.log(response)
-                navigate('/')
+                const newValue = reRender + 1
+                setRerender(newValue)
             })
             .catch((err) => {
                 console.log(err);
@@ -71,7 +72,7 @@ export default function AuthorArticles() {
                 setUnpublishedArticles(response.userPosts.unPublishedPosts)
         })
         .catch((error) => setError(error))
-    }, []);
+    }, [reRender]);
 
     return (
     <>
