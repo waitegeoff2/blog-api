@@ -11,6 +11,9 @@ postsRouter.post('/', passport.authenticate('jwt', { session: false }), postsCon
 //usign id that will be pulled from JWT TOKEN
 postsRouter.get('/yourPosts', passport.authenticate('jwt', { session: false }), postsController.getUserPosts)
 
+//publish post
+postsRouter.post('/publish', passport.authenticate('jwt', { session: false }), postsController.publishPost)
+
 //get a post and show the comments and the author
 postsRouter.get('/:postId', postsController.getSinglePost)
 

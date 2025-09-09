@@ -36,26 +36,7 @@ try {
     } catch(error) {
         next(error);
     }
-
-    //***should be available in req.users because it was sent with a JWT
-    
-    // try {
-    // //const userId = GET FROM JWT TOKEN
-    // //const posts = await db.getUserPosts(userId)
-    // } catch(error) {
-    //     next(error)
-    // }
 }
-
-//RETURN BOTH IN FUNCTION ABOVE
-// async function getUserUnpublishedPosts(req, res){
-//     try {
-//         const unpublishedPosts = await db.getUserUnpublishedPosts()
-//         res.json(unpublishedPosts)
-//     } catch (error) {
-//         next(error);
-//     }
-// }
 
 //create a post
 
@@ -66,6 +47,17 @@ async function createPost(req, res) {
         let title = req.body.title;
         let content = req.body.content;
         await db.createPost(author, title, content)
+        res.json({ message: "Post created" })
+    } catch (error) {
+        next(error);
+    }
+}
+
+//publish post
+async function publishPost(req, res) {
+    try {
+        const articleId = req.body.articleId;
+        await db.publishPost(articleId)
     } catch (error) {
         next(error);
     }
@@ -117,6 +109,7 @@ module.exports = {
     createPost,
     getSinglePost,
     getUserPosts,
+    publishPost,
     deletePost,
     postComment,
     deleteComment,

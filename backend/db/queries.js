@@ -138,6 +138,22 @@ async function createPost(author, title, body) {
     }
 }
 
+//publish an unpublished post
+async function publishPost(articleId){
+    try{ 
+        await prisma.post.update({
+            where: {
+                id: articleId,
+            },
+            data: {
+                published: true,
+            }
+        })
+    } catch(error) {
+        console.error("Something went wrong: ", error);
+    }
+}
+
 //delete post
 async function deletePost(postId){
     try{ 
@@ -216,6 +232,7 @@ module.exports = {
     getSinglePost,
     getUserPosts,
     createPost,
+    publishPost,
     deletePost,
     postComment,
     deleteComment
