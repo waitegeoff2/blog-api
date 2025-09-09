@@ -3,17 +3,21 @@ import { Outlet } from 'react-router-dom'
 import './App.css'
 import NavBar from './components/NavBar/NavBar'
 
+
+
 function App() {
   //pass user details through the app to use them
   const [user, setUser] = useState(null);
   const [triggerJwt, setTriggerJwt] = useState(null);
+
+  const apiUrl = import.meta.env.VITE_API_LINK;
 
   useEffect(() => {
     //take jwt out of local storage
     const token = localStorage.getItem('jwtToken');
     if (token) {
       //user jwt to make a fetch request to server
-      fetch('http://localhost:3000/userinfo', {
+      fetch(`${apiUrl}/userinfo`, {
         method: 'GET',
         headers: {
             'Authorization': `Bearer ${token}` // Replace 'yourJwtToken' with the actual token

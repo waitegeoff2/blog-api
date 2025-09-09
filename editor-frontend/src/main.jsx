@@ -8,6 +8,7 @@ import Register from './components/Register/Register.jsx';
 // import Articles from './components/Articles/Articles.jsx';
 // import Post from './components/Post/Post.jsx'
 import AuthorArticles from './components/AuthorArticles/AuthorArticles.jsx'
+import CreateArticle from './components/CreateArticle/CreateArticle.jsx'
 
 const router = createBrowserRouter([
   {
@@ -21,6 +22,7 @@ const router = createBrowserRouter([
       //  { path: 'posts/:postId', element: <Post /> },
        { path: 'login', element: <Login /> },
        { path: 'register', element: <Register /> },
+       { path: 'create', element: <CreateArticle /> },
     ],
   },
 ]);
