@@ -38,7 +38,7 @@ function App() {
   function userLogout() {
         //for when a userlogs out, set user to null
   }
-  
+
   return (
     <>
       <NavBar user={user} setUser={setUser} setTriggerJwt={setTriggerJwt} />

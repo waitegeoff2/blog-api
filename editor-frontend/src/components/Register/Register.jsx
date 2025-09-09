@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router";
+import './Register.css'
 
 export default function RegistrationForm() {
     //handle submit (make post request to api, update user)
@@ -72,8 +73,8 @@ export default function RegistrationForm() {
         <div className="registration-section">
             <h2>Register:</h2>
             <ul className="errors-list">
-            {errArray.map((error) =>(
-                <li>{error}</li>
+            {errArray.map((error, index) =>(
+                <li key={index}>{error}</li>
             ))}
             </ul>
             <form className="registration-form" onSubmit={handleSubmit}>
@@ -117,7 +118,7 @@ export default function RegistrationForm() {
                     onChange={(e) => setConfirmPassword(e.target.value)}
                     required
                 />
-                <button type="submit">Register</button>
+                <button className="submitBtn" type="submit">Register</button>
             </form>
         </div>
     )
