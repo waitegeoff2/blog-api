@@ -41,3 +41,23 @@
 .tab-page {
 
 }
+
+.author-articles-list {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+}
+
+.author-article-card {
+    display: flex;
+    flex-direction: column;
+    padding: 5px;
+    border: 1px solid black;
+    border-radius: 5px;
+
+}
+
+.publish-bar {
+    display: flex;
+    justify-content: space-between;
+}

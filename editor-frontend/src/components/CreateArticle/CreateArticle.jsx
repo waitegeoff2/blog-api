@@ -30,7 +30,7 @@ export default function CreateArticle() {
         })
         .then((response) => {   
             console.log(response)
-            // navigate('/');
+            navigate('/');
         })
         .catch((err) => {
             console.log(err);
