@@ -2,15 +2,39 @@
 // posts will be divided into PUBLISHED AND UNPUBLISHED (button to switch)
 // button to publish post in unpublished section
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import './AuthorArticles.css';
 
 export default function AuthorArticles() {
     const [activeTab, setActiveTab] = useState('tab1'); 
+    const [publishedArticles, setPublishedArticles] = useState([]);
+    const [unpublishedArticles, setUnpublishedArticles] = useState([]);
     
     const handleTabClick = (tabName) => {
         setActiveTab(tabName);
     };
+
+    //useEffect to get the author articles (published and unpublished)
+    useEffect(() => {
+    fetch("http://localhost:3000/posts/yourPosts", { 
+            method: 'GET',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            
+            })
+      .then((response) => {
+        if (response.status >= 400) {
+          throw new Error("server error");
+        }
+        return response.json();
+      })
+      .then((response) => {   
+            setArticles(response)
+            
+       })
+      .catch((error) => setError(error))
+    }, []);
 
     return (
     <>
