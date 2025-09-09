@@ -1,3 +1,9 @@
+.page-title {
+    display: flex;
+    justify-self: center;
+    margin-top: 3%;
+}
+
 .tabs-container {
   max-width: 600px;
   margin: 20px auto;
