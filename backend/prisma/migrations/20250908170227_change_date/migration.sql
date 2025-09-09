@@ -1,0 +1,3 @@
+-- AlterTable
+ALTER TABLE "public"."Post" ALTER COLUMN "postTime" DROP DEFAULT,
+ALTER COLUMN "postTime" SET DATA TYPE DATE;

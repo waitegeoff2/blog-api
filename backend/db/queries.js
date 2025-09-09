@@ -85,20 +85,39 @@ async function getSinglePost(postId) {
 }
 
 async function getUserPosts(userId){
+    //RETURN UNPUBLISHED AND PUBLISHED
     try{ 
-    const posts = await prisma.post.findMany({
+    const unPublishedPosts = await prisma.post.findMany({
         where: {
             authorId: userId,
+            published: false, //f????
         },
         include: {
             author: true,
         }
     })
 
+    const publishedPosts = await prisma.post.findMany({
+        where: {
+            authorId: userId,
+            published: true, //f????
+        },
+        include: {
+            author: true,
+            
+        }
+    })
+
+    const posts = { unPublishedPosts, publishedPosts }
+
     return posts;
     } catch (error) {
         console.error("Couldn't find posts: ", error)
     }
+}
+
+async function getUserUnpublishedPosts() {
+
 }
 
 async function createPost(author, title, body) {

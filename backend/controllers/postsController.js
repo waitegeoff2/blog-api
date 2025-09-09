@@ -1,7 +1,7 @@
 const db = require('../db/queries')
 
 // POSTS
-//blog page displays all posts with authors
+//blog page displays all PUBLISHED posts with authors
 async function getPosts(req, res, next) {
     try {
         const posts = await db.getPosts()
@@ -24,9 +24,10 @@ async function getSinglePost(req, res) {
     }
 }
 
-//find an author's posts
-//id will be pulled from JWT TOKEN
+//find an author's posts: need to get published and unpublished
+//try to get BOTH PUBLISHED AND UNPUBLISHED HERE
 async function getUserPosts(req, res){ 
+    const user = req.users;
     //***should be available in req.users because it was sent with a JWT
     
     // try {
@@ -36,6 +37,18 @@ async function getUserPosts(req, res){
     //     next(error)
     // }
 }
+
+//RETURN BOTH IN FUNCTION ABOVE
+// async function getUserUnpublishedPosts(req, res){
+//     try {
+//         const unpublishedPosts = await db.getUserUnpublishedPosts()
+//         res.json(unpublishedPosts)
+//     } catch (error) {
+//         next(error);
+//     }
+// }
+
+//create a post
 
 async function createPost(req, res) {
     try {
