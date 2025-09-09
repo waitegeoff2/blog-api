@@ -21,35 +21,6 @@ export default function AuthorArticles() {
         setActiveTab(tabName);
     };
 
-    async function publishArticle(articleId) {
-        try {
-            console.log(articleId)
-            const token = localStorage.getItem('jwtToken');
-
-            fetch(`${apiUrl}/posts/publish`, { 
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${token}` // Replace 'yourJwtToken' with the actual token
-            },
-            body: JSON.stringify({ articleId: articleId }), 
-            })
-            .then((response) => {
-                return response.json();
-            })
-            .then((response) => {   
-                console.log(response)
-                const newValue = reRender + 1
-                setRerender(newValue)
-            })
-            .catch((err) => {
-                console.log(err);
-            });
-        } catch(error) {
-            console.error("Error fetching user data:", error);
-        }
-    }
-
     //useEffect to get the author articles (published and unpublished)
     useEffect(() => {
         const token = localStorage.getItem('jwtToken');
@@ -73,6 +44,36 @@ export default function AuthorArticles() {
         })
         .catch((error) => setError(error))
     }, [reRender]);
+
+    async function publishArticle(articleId) {
+        try {
+            console.log(articleId)
+            const token = localStorage.getItem('jwtToken');
+
+            fetch(`${apiUrl}/posts/publish`, { 
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}` // Replace 'yourJwtToken' with the actual token
+            },
+            body: JSON.stringify({ articleId: articleId }), 
+            })
+            .then((response) => {
+                //it was getting stuck here cause there was no response 
+                return response.json();
+            })
+            .then((response) => {   
+                console.log(response)
+                const newValue = reRender + 1
+                setRerender(newValue)
+            })
+            .catch((err) => {
+                console.log(err);
+            });
+        } catch(error) {
+            console.error("Error fetching user data:", error);
+        }
+    }
 
     return (
     <>
