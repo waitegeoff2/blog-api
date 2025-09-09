@@ -28,13 +28,11 @@ async function getSinglePost(req, res) {
 //try to get BOTH PUBLISHED AND UNPUBLISHED HERE
 async function getUserPosts(req, res, next){ 
 try {
-        console.trace(req.user)
         let userData = req.user;
         let userId = req.user.id;
         let userPosts = await db.getUserPosts(userId)
         //returns both unpublished and published posts in different arrays
         res.status(200).json({ userPosts })
-
     } catch(error) {
         next(error);
     }
@@ -63,8 +61,9 @@ try {
 
 async function createPost(req, res) {
     try {
+        console.log(req.body)
+        let author = req.body.user.id;
         let title = req.body.title;
-        let author = req.body.author;
         let content = req.body.content;
         await db.createPost(author, title, content)
     } catch (error) {

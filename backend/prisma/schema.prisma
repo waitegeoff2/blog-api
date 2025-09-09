@@ -34,7 +34,7 @@ model Post {
   title  String   @db.VarChar(255)
   body   String    @db.Text //for longer text content
   published   Boolean  @default(false)
-  postTime  DateTime  @db.Date
+  postTime  DateTime  @default(now())
   comments   Comment[]
   
 }

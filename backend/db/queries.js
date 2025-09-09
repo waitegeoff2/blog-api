@@ -130,6 +130,7 @@ async function createPost(author, title, body) {
                 authorId: author,
                 title: title,
                 body: body,
+                
             }
         })
     } catch(error) {
