@@ -47,7 +47,7 @@ async function createPost(req, res) {
         let title = req.body.title;
         let content = req.body.content;
         await db.createPost(author, title, content)
-        res.json({ message: "Post created" })
+        res.json({ message: "Post published" })
     } catch (error) {
         next(error);
     }
@@ -58,6 +58,7 @@ async function publishPost(req, res) {
     try {
         const articleId = req.body.articleId;
         await db.publishPost(articleId)
+         res.json({ message: "Post published" })
     } catch (error) {
         next(error);
     }
