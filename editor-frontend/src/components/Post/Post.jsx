@@ -10,6 +10,8 @@ export default function Post() {
 
     const { user } = useOutletContext();
     const { postId } = useParams();
+    const apiUrl = import.meta.env.VITE_API_LINK;
+
 
     const navigate = useNavigate();
 
@@ -22,7 +24,7 @@ export default function Post() {
 
     //useEffect to get post with post id (PARAM)
     useEffect(() => {
-        fetch(`http://localhost:3000/posts/${postId}`, { 
+        fetch(`${apiUrl}/posts/${postId}`, { 
                 method: 'GET',
                 
                 })
@@ -49,7 +51,7 @@ export default function Post() {
         setIsModalOpen(false)
         e.preventDefault()
 
-        fetch(`http://localhost:3000/posts/${postId}`, { 
+        fetch(`${apiUrl}/posts/${postId}`, { 
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -80,7 +82,7 @@ export default function Post() {
                 {/* waits for post.author to exist before displaying
                 because it doesn't exist on initial render */}
                 <h2>By: {post.author && post.author.name}</h2>
-                <p>{post.body}</p>
+                <p className="post-body">{post.body}</p>
             </div>
             
             <div className="comments-section">

@@ -1,6 +1,7 @@
 import { useState } from "react";
 import './Login.css'
 import { useOutletContext, useNavigate } from "react-router";
+import { Link } from "react-router";
 
 export default function LoginForm() {
     //handle submit (make post request to api, get JWT token back)
@@ -8,6 +9,8 @@ export default function LoginForm() {
     const [username, setUserName] = useState('');
     const [password, setPassword] = useState('');
     const [errArray, setErrArray] = useState([]);
+    const apiUrl = import.meta.env.VITE_API_LINK;
+
 
     const navigate = useNavigate();
 
@@ -36,7 +39,7 @@ export default function LoginForm() {
         e.preventDefault()
         //if validation form returns true, continue with submission
         if(validateForm()) {
-            fetch("http://localhost:3000/login", { 
+            fetch(`${apiUrl}/login`, { 
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
@@ -104,6 +107,8 @@ export default function LoginForm() {
                 </div>
                 <button className="submit-btn" type="submit">Login</button>
             </form>
+            <span>Not a member? <Link to ="/register">Register here.</Link></span>
+
         </div>
     )
 }

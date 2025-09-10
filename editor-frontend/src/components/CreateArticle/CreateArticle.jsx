@@ -1,10 +1,13 @@
 import { useState, useRef } from "react";
 import { useNavigate, useOutletContext } from "react-router";
+import './CreateArticle.css'
 
 export default function CreateArticle() {
     
     const [title, setTitle] = useState('');
     const [content, setContent] = useState('');
+    const apiUrl = import.meta.env.VITE_API_LINK;
+
 
     const navigate = useNavigate();
 
@@ -17,7 +20,7 @@ export default function CreateArticle() {
         e.preventDefault()
         const token = localStorage.getItem('jwtToken');
 
-        fetch(`http://localhost:3000/posts`, { 
+        fetch(`${apiUrl}/posts`, { 
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -40,34 +43,38 @@ export default function CreateArticle() {
 
     return (
         <>
-        <h2>Create New Blog Post:</h2>
-        <form onSubmit={handleSubmit}>
-            <input
-                    type="hidden"
-                    name="hiddenField"
-                    value={user}
-            />
-            <div>
-                <label htmlFor="title">Title:</label>
+        <div className="create-section">
+            <h2>Create New Blog Post:</h2>
+            <form className="create-form" onSubmit={handleSubmit}>
                 <input
-                type="text"
-                id="title"
-                value={title}
-                onChange={(e) => setTitle(e.target.value)}
-                required
+                        type="hidden"
+                        name="hiddenField"
+                        value={user}
                 />
-            </div>
-            <div>
-                <label htmlFor="content">Content:</label>
-                <textarea
-                id="content"
-                value={content}
-                onChange={(e) => setContent(e.target.value)}
-                required
-                ></textarea>
-            </div>
-            <button type="submit">Create Post</button>
-        </form>
+                <div >
+                    <label htmlFor="title">Title:</label>
+                    <input
+                    className="blog-title"
+                    type="text"
+                    id="title"
+                    value={title}
+                    onChange={(e) => setTitle(e.target.value)}
+                    required
+                    />
+                </div>
+                <div className="blog-content">
+                    <label htmlFor="content">Content:</label>
+                    <textarea
+                    className="content-section"
+                    id="content"
+                    value={content}
+                    onChange={(e) => setContent(e.target.value)}
+                    required
+                    ></textarea>
+                </div>
+                <button type="submit">Create Post</button>
+            </form>
+        </div>
         </>
     )
 }

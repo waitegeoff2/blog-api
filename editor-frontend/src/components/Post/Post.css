@@ -1,14 +1,28 @@
 .article-page {
     display: flex;
     flex-direction: column;
+    align-items: center;
     padding: 20px;
+    gap: 20px;
+}
+
+.article-body {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    padding-left: 10%;
+    padding-right: 10%;
+}
+
+.post-body {
+    
 }
 
 .comments-section {
     display: flex;
     flex-direction: column;
     gap: 10px;
-    width: 50%;
+    width: 40%;
     background-color: rgb(199, 198, 198);
     border-radius: 5px;
     padding: 10px;

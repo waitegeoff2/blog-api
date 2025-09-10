@@ -29,16 +29,17 @@ export default function NavBar({user, setUser, setTriggerJwt}) {
         <>
             <div className="navBar">
                 <div className="navLinks">
-                    <div className="leftLinks">
-                        <Link to ="/">Home</Link>
+                    <div className="left-links">
+                        <Link to ="/">Your Articles</Link>
+                        <Link to="/create">Create Article</Link>
                     </div>
                     <div className="main-title">
-                        <h2>Fake Blog</h2>
+                        <h2>Author's Portal</h2>
                     </div>
                     <div className="rightLinks">
-                        <Link to ="register">Register</Link>
                         {/* <Link to ="login">Login</Link>
                         <button className='logOutBtn' onClick={handleLogOut}>Log Out</button> */}
+                        <Link to='posts'>All Articles</Link>
                         {user ? ( <button className='logOutBtn' onClick={handleLogOut}>Log Out</button> ) : ( <Link to ="login">Login</Link> ) }
                     </div>
                 </div>

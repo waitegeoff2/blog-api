@@ -9,6 +9,8 @@ export default function RegistrationForm() {
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
     const [errArray, setErrArray] = useState([]);
+    const apiUrl = import.meta.env.VITE_API_LINK;
+
 
     const navigate = useNavigate()
 
@@ -46,7 +48,7 @@ export default function RegistrationForm() {
 
         //if validation form returns true, continue with submission
         if(validateForm()) {
-            fetch("http://localhost:3000/signup", { 
+            fetch(`${apiUrl}/auth-signup`, { 
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
@@ -67,6 +69,7 @@ export default function RegistrationForm() {
             //if form isn't legit, don't submit
             console.log('Form has errors, cannot submit.');
         }
+
     }
 
     return (
