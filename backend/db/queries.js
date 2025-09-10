@@ -136,6 +136,23 @@ async function createPost(author, title, body) {
     }
 }
 
+//EDIT POST
+async function editPost(postId, newTitle, newBody) {
+    try {
+        const updatePost = await prisma.post.update({
+            where: {
+                id: postId,
+            },
+            data: {
+                title: newTitle,
+                body: newBody,
+            }
+        })
+    } catch(error) {
+        console.error("Failed to create post: ", error);
+    }
+}
+
 //publish an unpublished post
 async function publishPost(articleId){
     try{ 

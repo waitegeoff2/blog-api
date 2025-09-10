@@ -47,6 +47,7 @@ const jwtOptions = {
   secretOrKey: jwtSecret,
 };
 
+//verification strategy. get the user and return it
 passport.use(new JwtStrategy(jwtOptions, async (jwt_payload, done) => {
   try {
     const user = await prisma.user.findFirst({
@@ -63,26 +64,3 @@ passport.use(new JwtStrategy(jwtOptions, async (jwt_payload, done) => {
     return done(err);
   }
 }));
-
-
-// //INSTEADE OF THESE - JWT PASSPORT STRATEGY??????
-
-// //function TWO and THREE:
-// //allowing users to log in and stay logged in as they move around
-// //creates a cookie called connect.sid that is stored in the user's browser 
-// passport.serializeUser((user, done) => {
-//   done(null, user.id);
-// });
-
-// passport.deserializeUser(async (id, done) => {
-//   try {
-//     const user = await prisma.user.findFirst({
-//     where: {
-//         id: id,
-//     },
-//     });
-//     done(null, user);
-//   } catch(err) {
-//     done(err);
-//   }
-// });

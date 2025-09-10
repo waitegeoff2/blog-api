@@ -8,10 +8,9 @@ postsRouter.get('/', postsController.getPosts)
 postsRouter.post('/', passport.authenticate('jwt', { session: false }), postsController.createPost)
 
 //find all of author's posts
-//usign id that will be pulled from JWT TOKEN
 postsRouter.get('/yourPosts', passport.authenticate('jwt', { session: false }), postsController.getUserPosts)
 
-//publish post
+//take post from unpublished to published
 postsRouter.post('/publish', passport.authenticate('jwt', { session: false }), postsController.publishPost)
 
 //get a post and show the comments and the author
@@ -22,7 +21,6 @@ postsRouter.delete('/:postId', postsController.deletePost)
 
 //edit post (this will receive info from an edit form)
 //postsRouter.put('/:postId')
-//posts //CONTINUE THIS*******
 
 //COMMENTS
 //create comment

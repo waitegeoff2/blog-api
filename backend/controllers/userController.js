@@ -2,7 +2,7 @@ const { body, validationResult } = require("express-validator");
 const bcrypt = require("bcryptjs");
 const db = require('../db/queries')
 
-//get user data from jwt. use jwt to find user id, search db for that user, return user to react
+//get user data from jwt and send back to React for use through app
 async function getUserData(req, res, next) {
     //get the user data from the decoded JWT which is attached to req.user
     try {
