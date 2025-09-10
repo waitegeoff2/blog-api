@@ -65,7 +65,7 @@ async function getPosts() {
     }
 }
 
-//get a post (include author and comments)
+//get a post (include author and comments and the name of the author of the comment)
 async function getSinglePost(postId) {
     try {
         const postIdentity = parseInt(postId)
@@ -82,20 +82,6 @@ async function getSinglePost(postId) {
                     },
                 },
             },
-            // select: {
-            //         id: true,
-            //         title: true,
-            //         body: true,
-            //         published: true,
-            //         postTime: true,
-            //         comments: {
-            //                 id: true,
-            //                 author: true,
-            //                 createdAt: true,                        
-            //                 authorId: true,
-            //                 content: true
-            //             }
-            //         }
             })
         return singlePost;
     } catch(error) {
@@ -104,7 +90,7 @@ async function getSinglePost(postId) {
 }
 
 async function getUserPosts(userId){
-    //RETURN UNPUBLISHED AND PUBLISHED
+    //RETURN UNPUBLISHED AND PUBLISHED separately
     try{ 
     const unPublishedPosts = await prisma.post.findMany({
         where: {
@@ -133,10 +119,6 @@ async function getUserPosts(userId){
     } catch (error) {
         console.error("Couldn't find posts: ", error)
     }
-}
-
-async function getUserUnpublishedPosts() {
-
 }
 
 async function createPost(author, title, body) {
@@ -186,15 +168,6 @@ async function deletePost(postId){
 //post a comment
 async function postComment(postId, author, content){
     try {
-    //     //is this necessary????
-    // const authorId = await prisma.post.findFirst({
-    //     where: {
-    //         id: postId,
-    //     },
-    //     select: {
-    //         authorId: true,
-    //     }
-    // })
 
     await prisma.comment.create({
         data: {
@@ -220,26 +193,6 @@ async function deleteComment(commentId){
         console.error("Something went wrong: ", error);
     } 
 }
-
-//GET COMMENTS ON INDIVIDUAL POST
-//REDUNDANT
-
-// async function getComments(postId) {
-//     try {
-//         const comments = await prisma.post.findFirst({
-//             where: {
-//                 id: postId,
-//             },
-//             include: {
-//                 author: true,
-//                 comments: true,
-//             }
-//         })
-//         return comments;
-//     } catch(error) {
-//         console.error("Uhoh couldn't find comments: ", error);
-//     }
-// }
 
 module.exports = {
     createUser,

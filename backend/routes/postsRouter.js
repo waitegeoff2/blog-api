@@ -7,7 +7,7 @@ require('../config/passport');
 postsRouter.get('/', postsController.getPosts)
 postsRouter.post('/', passport.authenticate('jwt', { session: false }), postsController.createPost)
 
-//find author's (pull up all of an author's posts)
+//find all of author's posts
 //usign id that will be pulled from JWT TOKEN
 postsRouter.get('/yourPosts', passport.authenticate('jwt', { session: false }), postsController.getUserPosts)
 

@@ -1,7 +1,7 @@
 const db = require('../db/queries')
 
 // POSTS
-//blog page displays all PUBLISHED posts with authors
+//display all PUBLISHED posts with authors
 async function getPosts(req, res, next) {
     try {
         const posts = await db.getPosts()
@@ -11,7 +11,7 @@ async function getPosts(req, res, next) {
     }
 }
 
-//clicking on post, you get the post info, author info, and comments
+//view post, include author info, and comments
 async function getSinglePost(req, res) {
     try {
         console.log(req.params)
@@ -24,8 +24,7 @@ async function getSinglePost(req, res) {
     }
 }
 
-//find an author's posts: need to get published and unpublished
-//try to get BOTH PUBLISHED AND UNPUBLISHED HERE
+//find an author's posts, including published and unpublished separately
 async function getUserPosts(req, res, next){ 
 try {
         let userData = req.user;
@@ -39,7 +38,6 @@ try {
 }
 
 //create a post
-
 async function createPost(req, res) {
     try {
         let author = req.body.user.id;
@@ -52,7 +50,7 @@ async function createPost(req, res) {
     }
 }
 
-//publish post
+//publish a post
 async function publishPost(req, res) {
     try {
         const articleId = req.body.articleId;
@@ -101,8 +99,6 @@ async function deleteComment(req, res){
         next(error)
     }  
 }
-
-
 
 module.exports = {
     getPosts,

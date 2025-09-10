@@ -6,8 +6,8 @@ const jwt = require('jsonwebtoken')
 
 
 //when a post is made here (on React fill out the form and make the post request)
-//authenticate the user variables that get passed in with passport
-//LOOK AT GOOG AI POST, PRETTY SURE THAT'S ALL YOU NEED TO KNOW (it's basically the same as the passport jwt strategy)
+//authenticate the un and pw with passport
+//then, create token and add id to payload
 loginRouter.post(
       "/",
   passport.authenticate("local", { session: false, failWithError: true }), (req, res) => {
