@@ -19,6 +19,7 @@ export default function NavBar({user, setUser, setTriggerJwt}) {
                 console.log(response)
                 localStorage.removeItem("jwtToken")
                 setTriggerJwt('logged out')
+                setUser(null)
             })
             .catch((err) => {
                 console.log(err);
@@ -31,6 +32,9 @@ export default function NavBar({user, setUser, setTriggerJwt}) {
                 <div className="navLinks">
                     <div className="leftLinks">
                         <Link to ="/">Home</Link>
+                    </div>
+                    <div className="main-title">
+                        <h2>Fake Blog</h2>
                     </div>
                     <div className="rightLinks">
                         <Link to ="register">Register</Link>

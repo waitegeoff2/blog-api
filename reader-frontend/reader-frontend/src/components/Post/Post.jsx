@@ -8,8 +8,10 @@ import { useNavigate } from "react-router";
 //add props for USER
 export default function Post() {
 
-    const {user} = useOutletContext();
+    const { user } = useOutletContext();
     const { postId } = useParams();
+    const apiUrl = import.meta.env.VITE_API_LINK;
+
 
     const navigate = useNavigate();
 

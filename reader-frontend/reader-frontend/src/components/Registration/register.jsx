@@ -2,12 +2,13 @@ import { useState } from "react";
 import { useNavigate } from "react-router";
 
 export default function RegistrationForm() {
-    //handle submit (make post request to api, update user)
     const [name, setName] = useState('');
     const [username, setUserName] = useState('');
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
     const [errArray, setErrArray] = useState([]);
+    const apiUrl = import.meta.env.VITE_API_LINK;
+
 
     const navigate = useNavigate()
 
@@ -45,7 +46,7 @@ export default function RegistrationForm() {
 
         //if validation form returns true, continue with submission
         if(validateForm()) {
-            fetch("http://localhost:3000/signup", { 
+            fetch(`${apiUrl}/signup`, { 
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
@@ -63,7 +64,6 @@ export default function RegistrationForm() {
                 console.log(err);
             });
         } else {
-            //if form isn't legit, don't submit
             console.log('Form has errors, cannot submit.');
         }
     }

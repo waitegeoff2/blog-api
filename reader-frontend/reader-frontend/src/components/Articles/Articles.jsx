@@ -5,10 +5,11 @@ import { Link } from 'react-router';
 export default function Articles() {
     const [articles, setArticles] = useState([]);
     const [error, setError] = useState(null);
+    const apiUrl = import.meta.env.VITE_API_LINK;
 
     //fetch the articles to display
     useEffect(() => {
-    fetch("http://localhost:3000/posts", { 
+    fetch(`${apiUrl}/posts`, { 
             method: 'GET',
             headers: {
               'Content-Type': 'application/json',
@@ -31,7 +32,6 @@ export default function Articles() {
     return (
         <div className="articles-section">
             <h1 className='blog-title'>Blog posts</h1>
-            <h2>Fake blog</h2>
             <div className="articles-list">
                 {articles.map((article, index) => (
                     <div key={article.id} className="articleCard">

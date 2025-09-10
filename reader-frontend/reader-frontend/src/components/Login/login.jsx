@@ -55,6 +55,7 @@ export default function LoginForm() {
                 } else {
                     let data = response.token
                     localStorage.setItem('jwtToken', data)
+                    //trigger Jwt useeffect
                     setTriggerJwt('new')
                     console.log("token put into localStorage")
                     navigate('/');
