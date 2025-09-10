@@ -42,7 +42,6 @@ try {
 
 async function createPost(req, res) {
     try {
-        console.log(req.body)
         let author = req.body.user.id;
         let title = req.body.title;
         let content = req.body.content;

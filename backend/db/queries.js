@@ -16,6 +16,22 @@ async function createUser(name, username, password) {
     }
 }
 
+async function createAuthor(name, username, password) {
+    try {
+        await prisma.user.create({
+            data: {
+                name: name,
+                username: username,
+                password: password,
+                isAuth: true,
+            }
+        })
+    } catch(error) {
+        console.error("Something went wrong: ", error);
+    }
+}
+
+//turn user into an author
 async function becomeAuth(userId){
     try {
         await prisma.user.update({
@@ -36,9 +52,9 @@ async function becomeAuth(userId){
 async function getPosts() {
     try {
         const posts = await prisma.post.findMany({
-            // where: {
-            //     published: true,
-            // },
+            where: {
+                published: true,
+            },
             include: {
                 author: true,
             }
@@ -227,6 +243,7 @@ async function deleteComment(commentId){
 
 module.exports = {
     createUser,
+    createAuthor,
     becomeAuth,
     getPosts,
     getSinglePost,

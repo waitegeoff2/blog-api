@@ -27,6 +27,21 @@ async function createUser(req, res, next) {
     }
 }
 
+//create author
+async function createAuthor(req, res, next) {
+    try {
+        const user = req.body;
+        console.log(req.body)
+        let name = req.body.name;
+        let username = req.body.username;
+        let hashedPassword = await bcrypt.hash(req.body.password, 10);
+        const newUser = await db.createAuthor(name, username, hashedPassword)
+        res.json({ message: 'User created (is author)' }) //is this necessary?
+    } catch(error) {
+        next(error);
+    }
+}
+
 
 //make user an author
 async function becomeAuth(userId) {
@@ -45,6 +60,7 @@ async function deleteUser(req, res, next) {
 module.exports = {
     getUserData,
     createUser,
+    createAuthor,
     becomeAuth,
     deleteUser
 }
