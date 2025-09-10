@@ -13,5 +13,4 @@ userRouter.post('/signup', userController.createUser)
 //author signup
 userRouter.post('/auth-signup', userController.createAuthor)
 
-
 module.exports = userRouter;

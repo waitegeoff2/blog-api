@@ -23,31 +23,12 @@ app.use(express.json())
 const assetsPath = path.join(__dirname, "public");
 app.use(express.static(assetsPath));
 
-//UPDATE WITH PRISMA SESSION - UNNECESSARY!!!
-app.use(
-  session({
-     cookie: {
-     maxAge: 7 * 24 * 60 * 60 * 1000 // ms
-    },
-    secret: process.env.SESSION_SECRET,
-    resave: true,
-    saveUninitialized: true,
-    store: new PrismaSessionStore(
-      prisma,
-      {
-        checkPeriod: 2 * 60 * 1000,  //ms
-        dbRecordIdIsSessionId: true,
-        dbRecordIdFunction: undefined,
-      }
-    )
-  })
-);
-app.use(passport.session());
+//parse form requests and makes available in req.body
 app.use(express.urlencoded({ extended: false }));
 
-//view library - PROBABLY UNNECESSARY!!
-app.set("views", path.join(__dirname, "views"));
-app.set("view engine", "ejs");
+//view library - don't need it for this one
+// app.set("views", path.join(__dirname, "views"));
+// app.set("view engine", "ejs");
 
 //CURRENTUSER middleware: to allow access to currentUser in views to render the current user without having to pass it in
 // insert this code somewhere between where you instantiate the passport middleware 
@@ -79,9 +60,6 @@ app.use((error, req, res, next) => {
 
 const PORT = 3000;
 app.listen(PORT, (error) => {
-  // This is important!
-  // Without this, any startup errors will silently fail
-  // instead of giving you a helpful error message.
   if (error) {
     throw error;
   }
