@@ -14,7 +14,6 @@ const router = createBrowserRouter([
   {
     path: '/',
     element: <App />,
-    //update routes
     children: [
       { index: true, element: <Navigate to="yourposts" replace /> },
       { path: 'posts', element: <Articles /> },
