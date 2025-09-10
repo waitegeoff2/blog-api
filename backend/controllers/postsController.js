@@ -62,7 +62,12 @@ async function publishPost(req, res) {
 }
 
 //edit post
-//ADD
+// async function editPost(req, res){
+//     const postId = req.params;
+//     const newTitle = req.body.title;
+//     const newContent = req.body.content;
+//     await db.editPost(postId, newTitle, newContent)
+// }
 
 //delete post
 async function deletePost(req, res){

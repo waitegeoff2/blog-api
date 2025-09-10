@@ -20,7 +20,7 @@ postsRouter.get('/:postId', postsController.getSinglePost)
 postsRouter.delete('/:postId', postsController.deletePost)
 
 //edit post (this will receive info from an edit form)
-//postsRouter.put('/:postId')
+//postsRouter.put('/:postId', postsController.editPost)
 
 //COMMENTS
 //create comment
