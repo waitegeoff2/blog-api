@@ -3,7 +3,6 @@ import { useParams } from "react-router";
 import './Post.css'
 import { useOutletContext } from "react-router";
 import CommentModal from '../CommentModal/CommentModal'
-import { useNavigate } from "react-router";
 
 //add props for USER
 export default function Post() {
@@ -11,10 +10,6 @@ export default function Post() {
     const { user } = useOutletContext();
     const { postId } = useParams();
     const apiUrl = import.meta.env.VITE_API_LINK;
-
-
-    const navigate = useNavigate();
-
 
     const [post, setPost] = useState([]);
     const [error, setError] = useState();
@@ -72,7 +67,6 @@ export default function Post() {
         });
 
     }
-
 
     return (
     <>

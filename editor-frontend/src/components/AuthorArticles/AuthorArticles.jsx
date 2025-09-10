@@ -14,8 +14,7 @@ export default function AuthorArticles() {
     const [error, setError] = useState();
     const [reRender, setRerender] = useState(1);
     const apiUrl = import.meta.env.VITE_API_LINK;
-    const {user} = useOutletContext()
-    const navigate = useNavigate()
+    const { user } = useOutletContext()
 
     const handleTabClick = (tabName) => {
         setActiveTab(tabName);
@@ -81,7 +80,8 @@ export default function AuthorArticles() {
         <h2>{user.name}'s Articles</h2>
       ) : (
         <h2>Your Articles</h2>
-      )}</div>
+      )}
+    </div>
     <div className="tabs-container">
       <div className="tab-buttons">
         <button

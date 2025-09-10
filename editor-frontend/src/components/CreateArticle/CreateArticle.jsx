@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import { useState } from "react";
 import { useNavigate, useOutletContext } from "react-router";
 import './CreateArticle.css'
 

@@ -3,22 +3,19 @@ import { useNavigate } from "react-router";
 import './Register.css'
 
 export default function RegistrationForm() {
-    //handle submit (make post request to api, update user)
     const [name, setName] = useState('');
     const [username, setUserName] = useState('');
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
     const [errArray, setErrArray] = useState([]);
     const apiUrl = import.meta.env.VITE_API_LINK;
-
-
     const navigate = useNavigate()
 
     const validateForm = () => {
         let newErrors = [];
         let isValid = true;
 
-        //validations
+        //form validation
         if (!name) {
             newErrors.push('Your name is required.');
             isValid = false;
@@ -66,10 +63,8 @@ export default function RegistrationForm() {
                 console.log(err);
             });
         } else {
-            //if form isn't legit, don't submit
             console.log('Form has errors, cannot submit.');
         }
-
     }
 
     return (

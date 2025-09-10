@@ -19,6 +19,7 @@ export default function NavBar({user, setUser, setTriggerJwt}) {
                 console.log(response)
                 localStorage.removeItem("jwtToken")
                 setTriggerJwt('logged out')
+                setUser(null)
             })
             .catch((err) => {
                 console.log(err);
